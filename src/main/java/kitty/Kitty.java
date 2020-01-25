@@ -8,4 +8,8 @@ public interface Kitty {
     }
 
     Kitty run();
+
+    Kitty run(int port);
+
+    Kitty run(int port, Handler message);
 }
