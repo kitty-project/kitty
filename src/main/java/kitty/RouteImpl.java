@@ -1,18 +1,18 @@
 package kitty;
 
 class RouteImpl implements Route {
-    private final String method;
+    private final HttpMethod method;
     private final String path;
     private final RequestHandler handler;
 
-    public RouteImpl(String method, String path, RequestHandler handler) {
+    RouteImpl(HttpMethod method, String path, RequestHandler handler) {
         this.method = method;
         this.path = path;
         this.handler = handler;
     }
 
     @Override
-    public String method() {
+    public HttpMethod method() {
         return method;
     }
 

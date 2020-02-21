@@ -1,7 +1,7 @@
 package kitty;
 
 public interface Route {
-    String method();
+    HttpMethod method();
 
     String path();
 
