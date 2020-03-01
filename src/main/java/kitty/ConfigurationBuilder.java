@@ -1,33 +1,30 @@
 package kitty;
 
-import javax.json.bind.Jsonb;
-import javax.json.bind.JsonbBuilder;
+import java.io.IOException;
+import java.net.ServerSocket;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ConfigurationBuilder {
-    private static final boolean SSL = System.getProperty("ssl") != null;
-    private static final int PORT = Integer.parseInt(System.getProperty("port", SSL ? "8443" : "7000"));
-    private String host = "localhost";
-    private int port = PORT;
-    private String contextPath = "/";
-    private Object jsonMapper = JsonbBuilder.create();
-    private ViewResolver viewResolver = PebbleViewResolver.create();
+    private static final Logger LOGGER = Logger.getLogger(ConfigurationBuilder.class.getName());
+    private String host;
+    private int port;
+    private String contextPath;
+    private Object jsonMapper;
+    private ViewResolver viewResolver;
 
-    private ConfigurationBuilder() {
-
+    private ConfigurationBuilder(Configuration configuration) {
+        this.host = configuration.host();
+        this.port = configuration.port();
+        this.contextPath = configuration.contextPath();
+        this.jsonMapper = configuration.jsonMapper();
+        this.viewResolver = configuration.viewResolver();
     }
 
     public static ConfigurationBuilder builder() {
-        return new ConfigurationBuilder();
-    }
-
-    public static ConfigurationBuilder builder(Configuration configuration) {
-        return new ConfigurationBuilder()
-                .host(configuration.host())
-                .port(configuration.port())
-                .contextPath(configuration.contextPath())
-                .jsonMapper(configuration.jsonMapper());
+        return new ConfigurationBuilder(DefaultConfiguration.create());
     }
 
     public String host() {
@@ -46,7 +43,19 @@ public class ConfigurationBuilder {
     }
 
     public ConfigurationBuilder port(int port) {
-        this.port = port;
+        if (port < 0) {
+            throw new IllegalArgumentException("Parameter 'port' cannot be less than 0!");
+        } else if (port == 0) {
+            try (ServerSocket socket = new ServerSocket(0)) {
+                socket.setReuseAddress(true);
+                this.port = socket.getLocalPort();
+            } catch (IOException exception) {
+                LOGGER.log(Level.WARNING, "No available port; using default port " + port + "!");
+            }
+        } else {
+            this.port = port;
+        }
+
         return this;
     }
 

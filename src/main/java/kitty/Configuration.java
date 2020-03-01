@@ -9,10 +9,6 @@ public interface Configuration {
         return ConfigurationBuilder.builder();
     }
 
-    static ConfigurationBuilder builder(Configuration configuration) {
-        return ConfigurationBuilder.builder(configuration);
-    }
-
     String host();
 
     int port();

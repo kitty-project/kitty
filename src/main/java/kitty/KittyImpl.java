@@ -36,9 +36,8 @@ class KittyImpl implements Kitty, Handler {
     @Override
     public void handle() {
         if (port != -1) {
-            GrizzlyHttpServer.run(Configuration.builder(configuration).port(port).build(), routes);
+            GrizzlyHttpServer.run(Configuration.builder().port(port).build(), routes);
         } else {
-
             GrizzlyHttpServer.run(configuration, routes);
         }
     }
