@@ -30,7 +30,7 @@ final class GrizzlyHttpHandler extends HttpHandler {
 
     private void handle(Request request, Response response, Route route) throws IOException {
         kitty.Request req = new RequestImpl();
-        kitty.Response res = new ResponseImpl();
+        kitty.Response res = new ResponseImpl(this.configuration);
         RequestHandler handler = route.handler();
         kitty.Response response1 = handler.handle(req, res);
         response.setStatus(response1.status().statusCode());

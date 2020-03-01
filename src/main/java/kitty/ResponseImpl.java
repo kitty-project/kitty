@@ -5,10 +5,14 @@ import java.util.Map;
 import java.util.Objects;
 
 class ResponseImpl implements Response {
+    private final Configuration configuration;
     private ContentType contentType = ContentType.TEXT_PLAIN;
     private Object body;
     private HttpStatus httpStatus = HttpStatus.OK;
-    private ViewResolver viewResolver = new PebbleViewResolver();
+
+    ResponseImpl(Configuration configuration) {
+        this.configuration = configuration;
+    }
 
     @Override
     public ContentType contentType() {
@@ -71,13 +75,15 @@ class ResponseImpl implements Response {
     public Response render(String template) {
         Objects.requireNonNull(template, "Parameter 'template' is null!");
 
-        if (this.viewResolver != null) {
+        var viewResolver = this.configuration.viewResolver();
+
+        if (viewResolver != null) {
             Writer writer;
             if (this.body != null && this.body instanceof Map<?, ?>) {
                 Map<String, Object> attributes = (Map<String, Object>) this.body;
-                writer = this.viewResolver.process(template, attributes);
+                writer = viewResolver.process(template, attributes);
             } else {
-                writer = this.viewResolver.process(template, null);
+                writer = viewResolver.process(template, null);
             }
 
             this.body = writer.toString();

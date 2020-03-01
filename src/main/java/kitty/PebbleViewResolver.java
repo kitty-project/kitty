@@ -12,6 +12,14 @@ class PebbleViewResolver implements ViewResolver {
     private String prefix = "templates";
     private String suffix = ".html";
 
+    private PebbleViewResolver() {
+
+    }
+
+    public static ViewResolver create() {
+        return new PebbleViewResolver();
+    }
+
     @Override
     public ViewResolver prefix(String prefix) {
         this.prefix = prefix;

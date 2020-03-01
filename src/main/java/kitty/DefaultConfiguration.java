@@ -29,4 +29,9 @@ class DefaultConfiguration implements Configuration {
     public Object jsonMapper() {
         return JsonbBuilder.create();
     }
+
+    @Override
+    public ViewResolver viewResolver() {
+        return PebbleViewResolver.create();
+    }
 }

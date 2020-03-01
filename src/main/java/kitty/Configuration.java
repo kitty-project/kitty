@@ -20,4 +20,6 @@ public interface Configuration {
     String contextPath();
 
     Object jsonMapper();
+
+    ViewResolver viewResolver();
 }
