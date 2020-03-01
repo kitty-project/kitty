@@ -50,7 +50,7 @@ public class ConfigurationBuilder {
                 socket.setReuseAddress(true);
                 this.port = socket.getLocalPort();
             } catch (IOException exception) {
-                LOGGER.log(Level.WARNING, "No available port; using default port " + port + "!");
+                LOGGER.log(Level.WARNING, () -> "No available port; using default port " + port + "!");
             }
         } else {
             this.port = port;
