@@ -1,20 +1,30 @@
 package kitty;
 
+import java.util.stream.Stream;
+
 public enum HttpStatus {
     OK(200, "OK"),
     CREATED(201, "Created"),
+    METHOD_NOW_ALLOWED(405, "Method Not Allowed"),
     NOT_FOUND(404, "Not Found");
 
-    private final int code;
+    private final int statusCode;
     private final String reasonPhrase;
 
-    HttpStatus(int code, String reasonPhrase) {
-        this.code = code;
+    HttpStatus(int statusCode, String reasonPhrase) {
+        this.statusCode = statusCode;
         this.reasonPhrase = reasonPhrase;
     }
 
-    public int code() {
-        return code;
+    public static HttpStatus of(int statusCode) {
+        return Stream.of(values())
+                .filter(httpStatus -> httpStatus.statusCode == statusCode)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Unknown HTTP Status"));
+    }
+
+    public int statusCode() {
+        return statusCode;
     }
 
     public String reasonPhrase() {
@@ -23,6 +33,6 @@ public enum HttpStatus {
 
     @Override
     public String toString() {
-        return code + " " + reasonPhrase;
+        return statusCode + " " + reasonPhrase;
     }
 }

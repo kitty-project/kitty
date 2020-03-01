@@ -14,4 +14,5 @@ public interface Router {
     Router post(String path, RequestHandler handler);
     Router put(String path, RequestHandler handler);
     Router trace(String path, RequestHandler handler);
+    Router withoutContextPath();
 }
