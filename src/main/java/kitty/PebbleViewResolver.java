@@ -7,8 +7,11 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-class PebbleViewResolver implements ViewResolver {
+public class PebbleViewResolver implements ViewResolver {
+    private static final Logger LOGGER = Logger.getLogger(PebbleViewResolver.class.getName());
     private String prefix = "templates";
     private String suffix = ".html";
 
@@ -46,7 +49,8 @@ class PebbleViewResolver implements ViewResolver {
                 compiledTemplate.evaluate(writer);
             }
         } catch (IOException exception) {
-            exception.printStackTrace();
+            LOGGER.log(Level.SEVERE, () -> exception.getMessage());
+            throw new RuntimeException(exception.getMessage(), exception);
         }
 
         return writer;
