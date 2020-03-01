@@ -24,6 +24,11 @@ class ConfigurationImpl implements Configuration {
 
     @Override
     public Object jsonMapper() {
-        return null;
+        return configurationBuilder.jsonMapper();
+    }
+
+    @Override
+    public ViewResolver viewResolver() {
+        return configurationBuilder.viewResolver();
     }
 }

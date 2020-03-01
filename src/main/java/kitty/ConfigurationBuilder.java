@@ -12,6 +12,7 @@ public class ConfigurationBuilder {
     private int port = PORT;
     private String contextPath = "/";
     private Object jsonMapper = JsonbBuilder.create();
+    private ViewResolver viewResolver = PebbleViewResolver.create();
 
     private ConfigurationBuilder() {
 
@@ -69,6 +70,15 @@ public class ConfigurationBuilder {
 
     public Object jsonMapper() {
         return jsonMapper;
+    }
+
+    public ViewResolver viewResolver() {
+        return viewResolver;
+    }
+
+    public ConfigurationBuilder viewResolver(ViewResolver viewResolver) {
+        this.viewResolver = viewResolver;
+        return this;
     }
 
     public ConfigurationBuilder jsonMapper(Object jsonMapper) {
