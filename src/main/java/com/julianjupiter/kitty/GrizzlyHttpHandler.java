@@ -8,6 +8,7 @@ import org.glassfish.grizzly.http.server.Response;
 import javax.json.bind.Jsonb;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -29,13 +30,18 @@ final class GrizzlyHttpHandler extends HttpHandler {
     }
 
     private void handle(Request request, Response response, Route route) throws IOException {
-        com.julianjupiter.kitty.Request req = new RequestImpl();
+        com.julianjupiter.kitty.Request req = new RequestImpl(this.configuration, this.queryParams(request));
         com.julianjupiter.kitty.Response res = new ResponseImpl(this.configuration);
         RequestHandler handler = route.handler();
         com.julianjupiter.kitty.Response response1 = handler.handle(req, res);
         response.setStatus(response1.status().statusCode());
         response.setContentType(response1.contentType().toString());
         this.writeData(response1);
+    }
+
+    private Map<String, QueryParam> queryParams(Request request) {
+        return request.getParameterMap().entrySet().stream()
+                .collect(Collectors.toUnmodifiableMap(param -> param.getKey(), param -> QueryParam.of(param.getValue())));
     }
 
     private Route route(String requestHttpMethod, String requestPath) {

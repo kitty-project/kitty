@@ -1,21 +1,26 @@
 package com.julianjupiter.kitty;
 
 public class QueryParam {
-    private final Object value;
+    private final String[] values;
 
-    private QueryParam(Object value) {
-        this.value = value;
+    private QueryParam(String[] values) {
+        this.values = values;
     }
 
-    public static QueryParam of(Object param) {
-        return new QueryParam(null);
+    public static QueryParam of(String[] values) {
+        return new QueryParam(values);
     }
 
-    public Integer asInt() {
-        return Integer.valueOf((String) value);
+    public Integer toInt() {
+        return Integer.valueOf((String) values[0]);
     }
 
-    public String asString() {
-        return (String) value;
+    public Long toLong() {
+        return Long.valueOf(values[0]);
+    }
+
+    @Override
+    public String toString() {
+        return values[0];
     }
 }
