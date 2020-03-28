@@ -12,10 +12,18 @@ public class QueryParam {
     }
 
     public Integer toInt() {
+        if (values[0] == null) {
+            return null;
+        }
+
         return Integer.valueOf((String) values[0]);
     }
 
     public Long toLong() {
+        if (values[0] == null) {
+            return null;
+        }
+
         return Long.valueOf(values[0]);
     }
 

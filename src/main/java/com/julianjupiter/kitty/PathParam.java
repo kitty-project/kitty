@@ -11,11 +11,24 @@ public class PathParam {
         return new PathParam(null);
     }
 
-    public Integer asInt() {
+    public Integer toInt() {
+        if (value == null) {
+            return null;
+        }
+
         return Integer.valueOf((String) value);
     }
 
-    public String asString() {
+    public Long toLong() {
+        if (value == null) {
+            return null;
+        }
+
+        return Long.valueOf((String) value);
+    }
+
+    @Override
+    public String toString() {
         return (String) value;
     }
 }
