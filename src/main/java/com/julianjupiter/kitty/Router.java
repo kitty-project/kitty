@@ -3,7 +3,7 @@ package com.julianjupiter.kitty;
 import java.util.Set;
 
 public interface Router {
-    Set<Route> routes();
+    Set<Pair<PathMatcher, Route>> routes();
     Router any(String path, RequestHandler handler);
     Router anyOf(Set<HttpMethod> methods, String path, RequestHandler handler);
     Router delete(String path, RequestHandler handler);

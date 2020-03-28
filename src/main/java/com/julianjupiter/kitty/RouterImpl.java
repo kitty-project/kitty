@@ -22,7 +22,7 @@ class RouterImpl implements Router {
     }
 
     @Override
-    public Set<Route> routes() {
+    public Set<Pair<PathMatcher, Route>> routes() {
         this.updatePreviousRoutes();
 
         return routeMap.entrySet().stream()
@@ -37,7 +37,11 @@ class RouterImpl implements Router {
                     return pair.second();
                 })
                 .flatMap(routeSet -> routeSet.stream())
-                .peek(route -> System.out.println(route.path()))
+                .map(route -> {
+                    Pair<PathMatcher, Route> pair = Pair.of(PathPattern.compile(route.path()), route);
+                    return pair;
+                })
+                .peek(route -> System.out.println(route.second().path()))
                 .collect(Collectors.toSet());
     }
 

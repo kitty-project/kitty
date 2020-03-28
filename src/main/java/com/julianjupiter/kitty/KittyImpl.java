@@ -4,7 +4,7 @@ import java.util.Set;
 
 class KittyImpl implements Kitty, Handler {
     private final Configuration configuration;
-    private final Set<Route> routes;
+    private final Set<Pair<PathMatcher, Route>> routes;
     private int port = -1;
 
     public KittyImpl(Configuration configuration, Router router) {

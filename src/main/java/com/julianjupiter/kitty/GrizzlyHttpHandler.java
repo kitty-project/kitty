@@ -7,17 +7,16 @@ import org.glassfish.grizzly.http.server.Response;
 
 import javax.json.bind.Jsonb;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 final class GrizzlyHttpHandler extends HttpHandler {
     private final Configuration configuration;
-    private final Set<Route> routes;
+    private final Set<Pair<PathMatcher, Route>> routes;
     private NIOWriter out;
 
-    GrizzlyHttpHandler(Configuration configuration, Set<Route> routes) {
+    GrizzlyHttpHandler(Configuration configuration, Set<Pair<PathMatcher, Route>> routes) {
         this.configuration = configuration;
         this.routes = routes;
     }
@@ -47,12 +46,13 @@ final class GrizzlyHttpHandler extends HttpHandler {
     private Route route(String requestHttpMethod, String requestPath) {
         System.out.println(requestHttpMethod + ":" + requestPath);
 
-        List<Route> foundRoutes = routes.stream()
-                .filter(route -> PathPattern.compile(route.path())
+        Set<Route> foundRoutes = routes.stream()
+                .filter(pair -> pair.first()
                         .match(requestPath)
                         .matches()
                 )
-                .collect(Collectors.toUnmodifiableList());
+                .map(Pair::second)
+                .collect(Collectors.toUnmodifiableSet());
 
         if (foundRoutes.isEmpty()) {
             return new RouteImpl(null, null, (req, res) -> res

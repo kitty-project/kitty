@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 final class GrizzlyHttpServer {
     private static final Logger LOGGER = Logger.getLogger(GrizzlyHttpServer.class.getName());
 
-    public static void run(Configuration configuration, Set<Route> routes) {
+    public static void run(Configuration configuration, Set<Pair<PathMatcher, Route>> routes) {
         final HttpServer server = new HttpServer();
         NetworkListener networkListener = new NetworkListener("com.julianjupiter.kitty-listener", configuration.host(), configuration.port());
         server.addListener(networkListener);
