@@ -2,6 +2,7 @@ package com.julianjupiter.kitty;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 public class RequestImpl implements Request {
     private final Configuration configuration;
@@ -13,13 +14,16 @@ public class RequestImpl implements Request {
     }
 
     @Override
-    public PathParam pathParam(String param) {
-        return null;
+    public Optional<PathParam> pathParam(String param) {
+        Objects.requireNonNull(param, "Parameter 'param' cannot be null!");
+
+        return Optional.empty();
     }
 
     @Override
-    public QueryParam queryParam(String param) {
+    public Optional<QueryParam> queryParam(String param) {
         Objects.requireNonNull(param, "Parameter 'param' cannot be null!");
-        return queryParams.get(param);
+
+        return Optional.ofNullable(queryParams.get(param));
     }
 }

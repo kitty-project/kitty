@@ -1,7 +1,9 @@
 package com.julianjupiter.kitty;
 
-public interface Request {
-    PathParam pathParam(String param);
+import java.util.Optional;
 
-    QueryParam queryParam(String param);
+public interface Request {
+    Optional<PathParam> pathParam(String param);
+
+    Optional<QueryParam> queryParam(String param);
 }
