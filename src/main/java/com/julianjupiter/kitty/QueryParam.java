@@ -12,19 +12,27 @@ public class QueryParam {
     }
 
     public Integer toInt() {
-        if (values[0] == null) {
-            return null;
+        if (values != null && values[0] != null && !values[0].isBlank()) {
+            return Integer.valueOf((String) values[0]);
         }
 
-        return Integer.valueOf((String) values[0]);
+        return null;
     }
 
     public Long toLong() {
-        if (values[0] == null) {
-            return null;
+        if (values != null && values[0] != null && !values[0].isBlank()) {
+            return Long.valueOf(values[0]);
         }
 
-        return Long.valueOf(values[0]);
+        return null;
+    }
+
+    public Boolean toBoolean() {
+        if (values != null && values[0] != null && !values[0].isBlank()) {
+            return Boolean.valueOf(values[0]);
+        }
+
+        return null;
     }
 
     @Override
