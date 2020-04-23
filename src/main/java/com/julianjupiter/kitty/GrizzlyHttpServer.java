@@ -8,11 +8,11 @@ import org.glassfish.grizzly.http.server.StaticHttpHandler;
 
 import java.io.IOException;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import static java.lang.System.Logger;
+import static java.lang.System.Logger.Level;
 
 final class GrizzlyHttpServer {
-    private static final Logger LOGGER = Logger.getLogger(GrizzlyHttpServer.class.getName());
+    private static final Logger LOGGER = System.getLogger(GrizzlyHttpServer.class.getName());
 
     public static void run(Configuration configuration, Set<Pair<PathMatcher, Route>> routes) {
         final HttpServer server = new HttpServer();
@@ -27,7 +27,7 @@ final class GrizzlyHttpServer {
             server.start();
             System.in.read();
         } catch (IOException exception) {
-            LOGGER.log(Level.SEVERE, exception.getMessage(), exception);
+            LOGGER.log(Level.ERROR, exception.getMessage(), exception);
         } finally {
             server.shutdownNow();
         }

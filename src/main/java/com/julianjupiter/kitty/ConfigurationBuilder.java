@@ -4,11 +4,12 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import static java.lang.System.Logger;
+import static java.lang.System.Logger.Level;
+
 
 public class ConfigurationBuilder {
-    private static final Logger LOGGER = Logger.getLogger(ConfigurationBuilder.class.getName());
+    private static final Logger LOGGER = System.getLogger(ConfigurationBuilder.class.getName());
     private String host;
     private int port;
     private String contextPath;
