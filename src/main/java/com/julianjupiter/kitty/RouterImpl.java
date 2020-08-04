@@ -25,9 +25,8 @@ class RouterImpl implements Router {
     public Set<Pair<PathMatcher, Route>> routes() {
         this.updatePreviousRoutes();
 
-        return routeMap.entrySet().stream()
-                .map(map -> {
-                    Pair<Boolean, Set<Route>> pair = map.getValue();
+        return routeMap.values().stream()
+                .map(pair -> {
                     if (pair.first()) {
                         return pair.second().stream()
                                 .map(route -> new RouteImpl(route.method(), this.path(route.path()), route.handler()))
@@ -36,12 +35,8 @@ class RouterImpl implements Router {
 
                     return pair.second();
                 })
-                .flatMap(routeSet -> routeSet.stream())
-                .map(route -> {
-                    Pair<PathMatcher, Route> pair = Pair.of(PathPattern.compile(route.path()), route);
-                    return pair;
-                })
-                .peek(route -> System.out.println(route.second().path()))
+                .flatMap(Set::stream)
+                .map(route -> Pair.<PathMatcher, Route>of(PathPattern.compile(route.path()), route))
                 .collect(Collectors.toSet());
     }
 
