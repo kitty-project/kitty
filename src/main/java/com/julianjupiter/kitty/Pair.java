@@ -9,8 +9,8 @@ public class Pair<T, U> {
         this.u = u;
     }
 
-    public static <T, U> Pair of (T t, U u) {
-        return new Pair(t, u);
+    public static <T, U> Pair<T, U> of (T t, U u) {
+        return new Pair<>(t, u);
     }
 
     public T first() {
