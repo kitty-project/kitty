@@ -2,6 +2,7 @@
 /kitty/target
 /kitty-http-handler/target
 /kitty-http-message/target
+/kitty-web/target
 
 ### STS ###
 .apt_generated
@@ -36,6 +37,14 @@ kitty-http-message/.settings
 kitty-http-message/.springBeans
 kitty-http-message/.sts4-cache
 
+kitty-web/.apt_generated
+kitty-web/.classpath
+kitty-web/.factorypath
+kitty-web/.project
+kitty-web/.settings
+kitty-web/.springBeans
+kitty-web/.sts4-cache
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
@@ -65,6 +74,13 @@ kitty-http-message/*.ipr
 kitty-http-message/out/
 kitty-http-message/bin/
 
+kitty-web/.idea
+kitty-web/*.iws
+kitty-web/*.iml
+kitty-web/*.ipr
+kitty-web/out/
+kitty-web/bin/
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -90,6 +106,12 @@ kitty-http-message/bin/
 /kitty-http-message/nbdist/
 /kitty-http-message/.nb-gradle/
 
+/kitty-web/nbproject/private/
+/kitty-web/nbbuild/
+/kitty-web/dist/
+/kitty-web/nbdist/
+/kitty-web/.nb-gradle/
+
 ### VS Code ###
 .vscode/
 
@@ -98,3 +120,5 @@ kitty/.vscode/
 kitty-http-handler/.vscode/
 
 kitty-http-message/.vscode/
+
+kitty-web/.vscode/
