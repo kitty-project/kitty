@@ -2,57 +2,49 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>com.julianjupiter.kitty</groupId>
-    <artifactId>kitty-parent</artifactId>
-    <version>0.0.1</version>
-    <packaging>pom</packaging>
-
+    <artifactId>kitty</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
     <name>Kitty</name>
     <description>Kitty Microframework</description>
-    <url>https://kitty-project.github.io</url>
-
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-    <scm>
-        <connection>scm:git:git@github.com:kitty-project/kitty.git</connection>
-        <developerConnection>scm:git:git@github.com:kitty-project/kitty.git</developerConnection>
-        <url>https://github.com/kitty-project/kitty.git</url>
-        <tag>HEAD</tag>
-    </scm>
-
-    <developers>
-        <developer>
-            <name>Julian Jupiter</name>
-        </developer>
-    </developers>
 
     <properties>
-        <java.version>17</java.version>
+        <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
-    <modules>
-        <module>kitty-http-message</module>
-        <module>kitty-http-handler</module>
-        <module>kitty-web</module>
-    </modules>
-
     <dependencies>
+        <dependency>
+            <groupId>org.glassfish.grizzly</groupId>
+            <artifactId>grizzly-http-server</artifactId>
+            <version>2.4.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>yasson</artifactId>
+            <version>1.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>io.pebbletemplates</groupId>
+            <artifactId>pebble</artifactId>
+            <version>3.1.2</version>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.7.2</version>
+            <version>5.6.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>jakarta.json.bind</groupId>
+            <artifactId>jakarta.json.bind-api</artifactId>
+            <version>1.0.2</version>
+            <scope>compile</scope>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -1,5 +1,7 @@
 ### Maven ###
-/target
+/kitty/target
+/kitty-http-handler/target
+/kitty-http-message/target
 
 ### STS ###
 .apt_generated
@@ -10,6 +12,30 @@
 .springBeans
 .sts4-cache
 
+kitty/.apt_generated
+kitty/.classpath
+kitty/.factorypath
+kitty/.project
+kitty/.settings
+kitty/.springBeans
+kitty/.sts4-cache
+
+kitty-http-handler/.apt_generated
+kitty-http-handler/.classpath
+kitty-http-handler/.factorypath
+kitty-http-handler/.project
+kitty-http-handler/.settings
+kitty-http-handler/.springBeans
+kitty-http-handler/.sts4-cache
+
+kitty-http-message/.apt_generated
+kitty-http-message/.classpath
+kitty-http-message/.factorypath
+kitty-http-message/.project
+kitty-http-message/.settings
+kitty-http-message/.springBeans
+kitty-http-message/.sts4-cache
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
@@ -18,6 +44,27 @@
 out/
 bin/
 
+kitty/.idea
+kitty/*.iws
+kitty/*.iml
+kitty/*.ipr
+kitty/out/
+kitty/bin/
+
+kitty-http-handler/.idea
+kitty-http-handler/*.iws
+kitty-http-handler/*.iml
+kitty-http-handler/*.ipr
+kitty-http-handler/out/
+kitty-http-handler/bin/
+
+kitty-http-message/.idea
+kitty-http-message/*.iws
+kitty-http-message/*.iml
+kitty-http-message/*.ipr
+kitty-http-message/out/
+kitty-http-message/bin/
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -25,5 +72,29 @@ bin/
 /nbdist/
 /.nb-gradle/
 
+/kitty/nbproject/private/
+/kitty/kitty/nbbuild/
+/kitty/dist/
+/kitty/nbdist/
+/kitty/.nb-gradle/
+
+/kitty-http-handler/nbproject/private/
+/kitty-http-handler/kitty-http-handler/nbbuild/
+/kitty-http-handler/dist/
+/kitty-http-handler/nbdist/
+/kitty-http-handler/.nb-gradle/
+
+/kitty-http-message/nbproject/private/
+/kitty-http-message/nbbuild/
+/kitty-http-message/dist/
+/kitty-http-message/nbdist/
+/kitty-http-message/.nb-gradle/
+
 ### VS Code ###
 .vscode/
+
+kitty/.vscode/
+
+kitty-http-handler/.vscode/
+
+kitty-http-message/.vscode/
