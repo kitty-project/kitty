@@ -16,4 +16,7 @@ public interface Response extends Message {
     Response header(HttpHeader header);
 
     Response headers(HttpHeaders httpHeaders);
+
+    Response body(HttpBody body);
+
 }

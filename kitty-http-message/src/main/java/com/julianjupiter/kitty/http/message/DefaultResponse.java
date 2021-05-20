@@ -34,4 +34,8 @@ final class DefaultResponse extends DefaultMessage implements Response {
         return null;
     }
 
+    @Override
+    public Response body(HttpBody body) {
+        return null;
+    }
 }
