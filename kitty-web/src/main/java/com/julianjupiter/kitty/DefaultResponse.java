@@ -26,7 +26,7 @@ final class DefaultResponse extends DefaultMessage implements Response {
     }
 
     @Override
-    public Response header(String header) {
+    public Response header(String name, String value) {
         return null;
     }
 
