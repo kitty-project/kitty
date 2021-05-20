@@ -16,13 +16,13 @@ record DefaultRequestLine(HttpMethod method, URI target, HttpVersion version) im
     }
 
     DefaultRequestLine(HttpMethod method, URI target, HttpVersion version) {
-        this.method = Objects.requireNonNullElseGet(method, () -> HttpMethod.GET);
+        this.method = Objects.requireNonNullElse(method, HttpMethod.GET);
         this.target = Objects.requireNonNull(target, "Request target must not be null");
         this.version = Objects.requireNonNullElse(version, HttpVersion.HTTP_1_1);
     }
 
     @Override
     public String toString() {
-        return method.name() + " " + target.toString() + " " + version.toString();
+        return this.method.name() + " " + this.target.toString() + " " + this.version.toString();
     }
 }
