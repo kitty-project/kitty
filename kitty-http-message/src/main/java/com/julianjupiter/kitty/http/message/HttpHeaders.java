@@ -43,7 +43,7 @@ public final class HttpHeaders {
         return this;
     }
 
-    public HttpHeaders set(String name, String value) {
+    public HttpHeaders replace(String name, String value) {
         headerMap.compute(name, (n, v) -> {
             var headers = new ArrayList<HttpHeader>();
             headers.add(new HttpHeader(name, value));
@@ -52,7 +52,7 @@ public final class HttpHeaders {
         return this;
     }
 
-    public HttpHeaders set(HttpHeader header) {
+    public HttpHeaders replace(HttpHeader header) {
         headerMap.compute(header.name(), (name, value) -> {
             var headers = new ArrayList<HttpHeader>();
             headers.add(header);
