@@ -34,8 +34,4 @@ final class DefaultResponse extends DefaultMessage implements Response {
         return null;
     }
 
-    @Override
-    public Response ok() {
-        return null;
-    }
 }
