@@ -1,6 +1,6 @@
 ### Maven ###
 /kitty/target
-/kitty-http-handler/target
+/kitty-http-server-handler/target
 /kitty-http-message/target
 /kitty-web/target
 
@@ -21,13 +21,13 @@ kitty/.settings
 kitty/.springBeans
 kitty/.sts4-cache
 
-kitty-http-handler/.apt_generated
-kitty-http-handler/.classpath
-kitty-http-handler/.factorypath
-kitty-http-handler/.project
-kitty-http-handler/.settings
-kitty-http-handler/.springBeans
-kitty-http-handler/.sts4-cache
+kitty-http-server-handler/.apt_generated
+kitty-http-server-handler/.classpath
+kitty-http-server-handler/.factorypath
+kitty-http-server-handler/.project
+kitty-http-server-handler/.settings
+kitty-http-server-handler/.springBeans
+kitty-http-server-handler/.sts4-cache
 
 kitty-http-message/.apt_generated
 kitty-http-message/.classpath
@@ -60,12 +60,12 @@ kitty/*.ipr
 kitty/out/
 kitty/bin/
 
-kitty-http-handler/.idea
-kitty-http-handler/*.iws
-kitty-http-handler/*.iml
-kitty-http-handler/*.ipr
-kitty-http-handler/out/
-kitty-http-handler/bin/
+kitty-http-server-handler/.idea
+kitty-http-server-handler/*.iws
+kitty-http-server-handler/*.iml
+kitty-http-server-handler/*.ipr
+kitty-http-server-handler/out/
+kitty-http-server-handler/bin/
 
 kitty-http-message/.idea
 kitty-http-message/*.iws
@@ -94,11 +94,11 @@ kitty-web/bin/
 /kitty/nbdist/
 /kitty/.nb-gradle/
 
-/kitty-http-handler/nbproject/private/
-/kitty-http-handler/kitty-http-handler/nbbuild/
-/kitty-http-handler/dist/
-/kitty-http-handler/nbdist/
-/kitty-http-handler/.nb-gradle/
+/kitty-http-server-handler/nbproject/private/
+/kitty-http-server-handler/nbbuild/
+/kitty-http-server-handler/dist/
+/kitty-http-server-handler/nbdist/
+/kitty-http-server-handler/.nb-gradle/
 
 /kitty-http-message/nbproject/private/
 /kitty-http-message/nbbuild/
@@ -117,7 +117,7 @@ kitty-web/bin/
 
 kitty/.vscode/
 
-kitty-http-handler/.vscode/
+kitty-http-server-handler/.vscode/
 
 kitty-http-message/.vscode/
 
