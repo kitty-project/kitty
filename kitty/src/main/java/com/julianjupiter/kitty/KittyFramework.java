@@ -5,7 +5,7 @@ import com.julianjupiter.kitty.http.server.RequestHandler;
 /**
  * @author Julian Jupiter
  */
-final class DefaultKitty implements Kitty {
+final class KittyFramework implements Kitty {
 
     @Override
     public Kitty get(String path, RequestHandler handler) {
