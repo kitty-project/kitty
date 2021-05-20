@@ -75,6 +75,10 @@ public final class HttpHeaders {
         return this;
     }
 
+    public Map<String, List<HttpHeader>> get() {
+        return this.headerMap;
+    }
+
     public List<HttpHeader> get(String name) {
         return this.headerMap.getOrDefault(name, List.of());
     }
