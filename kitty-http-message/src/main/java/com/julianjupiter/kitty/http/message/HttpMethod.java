@@ -11,7 +11,7 @@ public enum HttpMethod {
 
     public static HttpMethod of(String method) {
         if (method == null || method.isBlank()) {
-            throw new IllegalArgumentException("HTTP 'method' must not be null or empty");
+            throw new IllegalArgumentException("HTTP method must not be null or empty");
         }
 
         return Arrays.stream(values())
