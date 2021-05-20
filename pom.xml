@@ -8,8 +8,8 @@
     <version>0.0.1</version>
     <packaging>pom</packaging>
 
-    <name>Kitty</name>
-    <description>Kitty Microframework</description>
+    <name>kitty-parent</name>
+    <description>Kitty</description>
     <url>https://kitty-project.github.io</url>
 
     <licenses>
@@ -43,7 +43,7 @@
     <modules>
         <module>kitty-http-message</module>
         <module>kitty-http-server-handler</module>
-        <module>kitty-web</module>
+        <module>kitty</module>
     </modules>
 
     <dependencies>

@@ -1,20 +1,14 @@
 package com.julianjupiter.kitty;
 
-import java.util.function.Function;
-
-public interface Kitty {
-
-    static Kitty create(Function<Router, Router> router) {
-        return create(Configuration.create(), router);
+/**
+ * @author Julian Jupiter
+ */
+public sealed interface Kitty extends RouterProxy permits DefaultKitty {
+    static Kitty meow() {
+        return new DefaultKitty();
     }
 
-    static Kitty create(Configuration configuration, Function<Router, Router> router) {
-        return new KittyImpl(configuration, router.apply(new RouterImpl(configuration.contextPath())));
-    }
+    void run();
 
-    Kitty run();
-
-    Kitty run(int port);
-
-    Kitty run(int port, Handler handler);
+    void run(Runnable runnable);
 }
