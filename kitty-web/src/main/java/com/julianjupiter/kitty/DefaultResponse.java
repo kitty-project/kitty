@@ -6,29 +6,39 @@ import com.julianjupiter.kitty.http.message.HttpHeaders;
 import com.julianjupiter.kitty.http.message.HttpStatus;
 import com.julianjupiter.kitty.http.message.HttpVersion;
 import com.julianjupiter.kitty.http.message.Response;
+import com.julianjupiter.kitty.http.message.StatusLine;
 
 /**
  * @author Julian Jupiter
  */
 final class DefaultResponse extends DefaultMessage implements Response {
+    private StatusLine statusLine = new DefaultStatusLine(HttpStatus.OK);
+
     @Override
     public HttpVersion version() {
-        return null;
+        return this.statusLine.version();
     }
 
     @Override
     public HttpStatus status() {
-        return null;
+        return this.statusLine.status();
     }
 
     @Override
     public Response status(int statusCode) {
-        return null;
+        this.statusLine = new DefaultStatusLine(HttpStatus.of(statusCode), this.statusLine.version());
+        return this;
     }
 
     @Override
     public Response status(HttpStatus status) {
-        return null;
+        this.statusLine = new DefaultStatusLine(status, this.statusLine.version());
+        return this;
+    }
+
+    @Override
+    public StatusLine statusLine() {
+        return this.statusLine;
     }
 
     @Override
