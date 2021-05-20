@@ -1,7 +1,6 @@
 package com.julianjupiter.kitty.http.message;
 
 import java.util.Arrays;
-import java.util.stream.Stream;
 
 /**
  * @author Julian Jupiter
