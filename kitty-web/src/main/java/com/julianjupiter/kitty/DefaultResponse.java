@@ -4,12 +4,18 @@ import com.julianjupiter.kitty.http.message.HttpBody;
 import com.julianjupiter.kitty.http.message.HttpHeader;
 import com.julianjupiter.kitty.http.message.HttpHeaders;
 import com.julianjupiter.kitty.http.message.HttpStatus;
+import com.julianjupiter.kitty.http.message.HttpVersion;
 import com.julianjupiter.kitty.http.message.Response;
 
 /**
  * @author Julian Jupiter
  */
 final class DefaultResponse extends DefaultMessage implements Response {
+    @Override
+    public HttpVersion version() {
+        return null;
+    }
+
     @Override
     public HttpStatus status() {
         return null;

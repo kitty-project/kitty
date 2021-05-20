@@ -5,12 +5,12 @@ import java.net.URI;
 /**
  * @author Julian Jupiter
  */
-public interface Request extends Message {
+public interface RequestLine {
 
     HttpMethod method();
 
     URI target();
 
-    RequestLine requestLine();
+    HttpVersion version();
 
 }
