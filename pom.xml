@@ -42,7 +42,7 @@
 
     <modules>
         <module>kitty-http-message</module>
-        <module>kitty-http-handler</module>
+        <module>kitty-http-server-handler</module>
         <module>kitty-web</module>
     </modules>
 

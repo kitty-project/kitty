@@ -1,0 +1,4 @@
+--patch-module
+com.julianjupiter.kitty.http.handler=_
+--add-reads
+com.julianjupiter.kitty.http.handler=ALL-UNNAMED

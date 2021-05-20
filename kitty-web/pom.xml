@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>com.julianjupiter.kitty</groupId>
-            <artifactId>kitty-http-handler</artifactId>
+            <artifactId>kitty-http-server-handler</artifactId>
             <version>0.0.1</version>
         </dependency>
         <dependency>

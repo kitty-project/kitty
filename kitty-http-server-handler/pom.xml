@@ -10,11 +10,11 @@
         <version>0.0.1</version>
     </parent>
 
-    <artifactId>kitty-http-handler</artifactId>
+    <artifactId>kitty-http-server-handler</artifactId>
     <packaging>jar</packaging>
 
-    <name>kitty-http-handler</name>
-    <description>Kitty HTTP Handler</description>
+    <name>kitty-http-server-handler</name>
+    <description>Kitty HTTP Server Handler</description>
 
     <dependencies>
         <dependency>
