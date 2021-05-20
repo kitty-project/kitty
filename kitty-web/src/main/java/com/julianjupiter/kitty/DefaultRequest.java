@@ -1,7 +1,9 @@
 package com.julianjupiter.kitty;
 
 import com.julianjupiter.kitty.http.message.HttpMethod;
+import com.julianjupiter.kitty.http.message.HttpVersion;
 import com.julianjupiter.kitty.http.message.Request;
+import com.julianjupiter.kitty.http.message.RequestLine;
 
 import java.net.URI;
 
@@ -9,13 +11,29 @@ import java.net.URI;
  * @author Julian Jupiter
  */
 final class DefaultRequest extends DefaultMessage implements Request {
+    private final RequestLine requestLine;
+
+    DefaultRequest(RequestLine requestLine) {
+        this.requestLine = requestLine;
+    }
+
     @Override
     public HttpMethod method() {
-        return null;
+        return this.requestLine.method();
     }
 
     @Override
     public URI target() {
-        return null;
+        return this.requestLine.target();
+    }
+
+    @Override
+    public HttpVersion version() {
+        return this.requestLine.version();
+    }
+
+    @Override
+    public RequestLine requestLine() {
+        return this.requestLine;
     }
 }
