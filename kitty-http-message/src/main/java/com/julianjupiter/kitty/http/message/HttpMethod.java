@@ -20,8 +20,4 @@ public enum HttpMethod {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid HTTP Method " + method));
     }
 
-    @Override
-    public String toString() {
-        return name();
-    }
 }
