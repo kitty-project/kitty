@@ -1,4 +1,7 @@
-package com.julianjupiter.kitty.http.message;
+package com.julianjupiter.kitty;
+
+import com.julianjupiter.kitty.http.message.HttpMethod;
+import com.julianjupiter.kitty.http.message.Request;
 
 import java.net.URI;
 
