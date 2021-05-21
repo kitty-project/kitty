@@ -13,4 +13,6 @@ public interface Request extends Message {
 
     RequestLine requestLine();
 
+    QueryParam[] queryParams();
+
 }

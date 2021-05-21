@@ -2,6 +2,7 @@ package com.julianjupiter.kitty;
 
 import com.julianjupiter.kitty.http.message.HttpMethod;
 import com.julianjupiter.kitty.http.message.HttpVersion;
+import com.julianjupiter.kitty.http.message.QueryParam;
 import com.julianjupiter.kitty.http.message.Request;
 import com.julianjupiter.kitty.http.message.RequestLine;
 
@@ -12,9 +13,11 @@ import java.net.URI;
  */
 final class DefaultRequest extends DefaultMessage implements Request {
     private final RequestLine requestLine;
+    private final QueryParam[] queryParams;
 
-    DefaultRequest(RequestLine requestLine) {
+    DefaultRequest(RequestLine requestLine, QueryParam[] queryParams) {
         this.requestLine = requestLine;
+        this.queryParams = queryParams;
     }
 
     @Override
@@ -35,5 +38,10 @@ final class DefaultRequest extends DefaultMessage implements Request {
     @Override
     public RequestLine requestLine() {
         return this.requestLine;
+    }
+
+    @Override
+    public QueryParam[] queryParams() {
+        return this.queryParams;
     }
 }

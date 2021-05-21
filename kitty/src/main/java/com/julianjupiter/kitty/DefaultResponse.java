@@ -1,6 +1,6 @@
 package com.julianjupiter.kitty;
 
-import com.julianjupiter.kitty.http.message.HttpBody;
+import com.julianjupiter.kitty.http.message.Body;
 import com.julianjupiter.kitty.http.message.HttpHeader;
 import com.julianjupiter.kitty.http.message.HttpHeaders;
 import com.julianjupiter.kitty.http.message.HttpStatus;
@@ -57,7 +57,7 @@ final class DefaultResponse extends DefaultMessage implements Response {
     }
 
     @Override
-    public Response body(HttpBody body) {
+    public Response body(Body body) {
         return null;
     }
 }

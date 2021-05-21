@@ -8,5 +8,5 @@ public interface Message {
 
     HttpHeaders headers();
 
-    HttpBody body();
+    Body body();
 }
