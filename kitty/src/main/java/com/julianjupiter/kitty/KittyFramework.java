@@ -36,7 +36,17 @@ final class KittyFramework implements Kitty {
     }
 
     @Override
+    public void run(int port) {
+
+    }
+
+    @Override
     public void run(Runnable runnable) {
+        runnable.run();
+    }
+
+    @Override
+    public void run(int port, Runnable runnable) {
         runnable.run();
     }
 
