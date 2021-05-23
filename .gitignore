@@ -1,5 +1,8 @@
 ### Maven ###
-/target
+/kitty/target
+/kitty-http-server-handler/target
+/kitty-http-message/target
+/kitty-web/target
 
 ### STS ###
 .apt_generated
@@ -10,6 +13,38 @@
 .springBeans
 .sts4-cache
 
+kitty/.apt_generated
+kitty/.classpath
+kitty/.factorypath
+kitty/.project
+kitty/.settings
+kitty/.springBeans
+kitty/.sts4-cache
+
+kitty-http-server-handler/.apt_generated
+kitty-http-server-handler/.classpath
+kitty-http-server-handler/.factorypath
+kitty-http-server-handler/.project
+kitty-http-server-handler/.settings
+kitty-http-server-handler/.springBeans
+kitty-http-server-handler/.sts4-cache
+
+kitty-http-message/.apt_generated
+kitty-http-message/.classpath
+kitty-http-message/.factorypath
+kitty-http-message/.project
+kitty-http-message/.settings
+kitty-http-message/.springBeans
+kitty-http-message/.sts4-cache
+
+kitty-web/.apt_generated
+kitty-web/.classpath
+kitty-web/.factorypath
+kitty-web/.project
+kitty-web/.settings
+kitty-web/.springBeans
+kitty-web/.sts4-cache
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
@@ -18,6 +53,34 @@
 out/
 bin/
 
+kitty/.idea
+kitty/*.iws
+kitty/*.iml
+kitty/*.ipr
+kitty/out/
+kitty/bin/
+
+kitty-http-server-handler/.idea
+kitty-http-server-handler/*.iws
+kitty-http-server-handler/*.iml
+kitty-http-server-handler/*.ipr
+kitty-http-server-handler/out/
+kitty-http-server-handler/bin/
+
+kitty-http-message/.idea
+kitty-http-message/*.iws
+kitty-http-message/*.iml
+kitty-http-message/*.ipr
+kitty-http-message/out/
+kitty-http-message/bin/
+
+kitty-web/.idea
+kitty-web/*.iws
+kitty-web/*.iml
+kitty-web/*.ipr
+kitty-web/out/
+kitty-web/bin/
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -25,5 +88,37 @@ bin/
 /nbdist/
 /.nb-gradle/
 
+/kitty/nbproject/private/
+/kitty/kitty/nbbuild/
+/kitty/dist/
+/kitty/nbdist/
+/kitty/.nb-gradle/
+
+/kitty-http-server-handler/nbproject/private/
+/kitty-http-server-handler/nbbuild/
+/kitty-http-server-handler/dist/
+/kitty-http-server-handler/nbdist/
+/kitty-http-server-handler/.nb-gradle/
+
+/kitty-http-message/nbproject/private/
+/kitty-http-message/nbbuild/
+/kitty-http-message/dist/
+/kitty-http-message/nbdist/
+/kitty-http-message/.nb-gradle/
+
+/kitty-web/nbproject/private/
+/kitty-web/nbbuild/
+/kitty-web/dist/
+/kitty-web/nbdist/
+/kitty-web/.nb-gradle/
+
 ### VS Code ###
 .vscode/
+
+kitty/.vscode/
+
+kitty-http-server-handler/.vscode/
+
+kitty-http-message/.vscode/
+
+kitty-web/.vscode/
