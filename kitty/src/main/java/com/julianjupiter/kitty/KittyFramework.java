@@ -35,22 +35,20 @@ final class KittyFramework implements Kitty {
     }
 
     @Override
-    public void run() {
-
+    public void run() throws InterruptedException {
     }
 
     @Override
-    public void run(int port) {
-
+    public void run(int port) throws InterruptedException {
     }
 
     @Override
-    public void run(Runnable runnable) {
+    public void run(Runnable runnable) throws InterruptedException {
         runnable.run();
     }
 
     @Override
-    public void run(int port, Runnable runnable) {
+    public void run(int port, Runnable runnable) throws InterruptedException {
         runnable.run();
     }
 
