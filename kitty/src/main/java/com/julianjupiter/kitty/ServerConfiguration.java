@@ -1,9 +1,8 @@
 package com.julianjupiter.kitty;
 
-import com.julianjupiter.kitty.util.LoggerFactory;
+import com.julianjupiter.kitty.util.Constants;
+import com.julianjupiter.kitty.util.KittyUtil;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.UUID;
 
 /**
@@ -14,7 +13,7 @@ public interface ServerConfiguration {
     static ServerConfiguration create() {
         return new KittyServerConfiguration(
                 UUID.randomUUID().toString(),
-                host(),
+                KittyUtil.Server.hostAddress(),
                 Constants.Server.DEFAULT_PORT,
                 Constants.Server.DEFAULT_CONTEXT_PATH
         );
@@ -26,20 +25,10 @@ public interface ServerConfiguration {
 
     String name();
 
+    String hostAddress();
+
     int port();
 
     String contextPath();
-
-    static String host() {
-        try {
-            return InetAddress.getLocalHost().getHostAddress();
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-            LoggerFactory.getLogger(ServerConfiguration.class)
-                    .log(System.Logger.Level.WARNING, "Unknown host, using default " + Constants.Server.DEFAULT_HOST);
-        }
-
-        return Constants.Server.DEFAULT_HOST;
-    }
 
 }

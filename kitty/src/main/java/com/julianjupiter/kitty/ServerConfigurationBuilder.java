@@ -1,5 +1,8 @@
 package com.julianjupiter.kitty;
 
+import com.julianjupiter.kitty.util.Constants;
+import com.julianjupiter.kitty.util.KittyUtil;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.URI;
@@ -60,6 +63,6 @@ public class ServerConfigurationBuilder {
     }
 
     public ServerConfiguration build() {
-        return new KittyServerConfiguration(name, ServerConfiguration.host(), port, contextPath);
+        return new KittyServerConfiguration(name, KittyUtil.Server.hostAddress(), port, contextPath);
     }
 }
