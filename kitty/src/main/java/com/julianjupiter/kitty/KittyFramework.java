@@ -11,13 +11,23 @@ import java.util.Set;
  */
 final class KittyFramework implements Kitty {
     private final Configuration configuration;
+    private final Router router;
 
-    public KittyFramework() {
-        this(Configuration.create());
+    KittyFramework() {
+        this(Configuration.create(), Router.create());
     }
 
-    public KittyFramework(Configuration configuration) {
+    KittyFramework(Configuration configuration) {
+        this(configuration, Router.create());
+    }
+
+    KittyFramework(Router router) {
+        this(Configuration.create(), router);
+    }
+
+    KittyFramework(Configuration configuration, Router router) {
         this.configuration = configuration;
+        this.router = router;
     }
 
     @Override
