@@ -14,4 +14,6 @@ public interface Configuration {
 
     ServerConfiguration server();
 
+    Configuration server(ServerConfiguration serverConfiguration);
+
 }
