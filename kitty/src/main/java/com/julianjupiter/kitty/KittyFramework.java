@@ -11,27 +11,27 @@ import java.util.Set;
  */
 final class KittyFramework implements Kitty {
     private final Configuration configuration;
-    private final Router router;
+    private final RouteCollector routeCollector;
 
     static {
         System.setProperty("java.util.logging.SimpleFormatter.format", "[%1$tF %1$tT] [%4$s] %5$s %n");
     }
 
     KittyFramework() {
-        this(Configuration.create(), Router.create());
+        this(Configuration.create(), RouteCollector.create());
     }
 
     KittyFramework(Configuration configuration) {
-        this(configuration, Router.create());
+        this(configuration, RouteCollector.create());
     }
 
-    KittyFramework(Router router) {
-        this(Configuration.create(), router);
+    KittyFramework(RouteCollector routeCollector) {
+        this(Configuration.create(), routeCollector);
     }
 
-    KittyFramework(Configuration configuration, Router router) {
+    KittyFramework(Configuration configuration, RouteCollector routeCollector) {
         this.configuration = configuration;
-        this.router = router;
+        this.routeCollector = routeCollector;
     }
 
     @Override
@@ -56,121 +56,121 @@ final class KittyFramework implements Kitty {
 
     @Override
     public Kitty any(String path, RequestHandler handler) {
-        this.router.any(path, handler);
+        this.routeCollector.any(path, handler);
         return this;
     }
 
     @Override
     public Kitty any(String path, ContextHandler handler) {
-        this.router.any(path, handler);
+        this.routeCollector.any(path, handler);
         return this;
     }
 
     @Override
     public Kitty anyOf(Set<HttpMethod> methods, String path, RequestHandler handler) {
-        this.router.anyOf(methods, path, handler);
+        this.routeCollector.anyOf(methods, path, handler);
         return this;
     }
 
     @Override
     public Kitty anyOf(Set<HttpMethod> methods, String path, ContextHandler handler) {
-        this.router.anyOf(methods, path, handler);
+        this.routeCollector.anyOf(methods, path, handler);
         return this;
     }
 
     @Override
     public Kitty delete(String path, RequestHandler handler) {
-        this.router.delete(path, handler);
+        this.routeCollector.delete(path, handler);
         return this;
     }
 
     @Override
     public Kitty delete(String path, ContextHandler handler) {
-        this.router.delete(path, handler);
+        this.routeCollector.delete(path, handler);
         return this;
     }
 
     @Override
     public Kitty get(String path, RequestHandler handler) {
-        this.router.get(path, handler);
+        this.routeCollector.get(path, handler);
         return this;
     }
 
     @Override
     public Kitty get(String path, ContextHandler handler) {
-        this.router.get(path, handler);
+        this.routeCollector.get(path, handler);
         return this;
     }
 
     @Override
     public Kitty head(String path, RequestHandler handler) {
-        this.router.any(path, handler);
+        this.routeCollector.any(path, handler);
         return this;
     }
 
     @Override
     public Kitty head(String path, ContextHandler handler) {
-        this.router.head(path, handler);
+        this.routeCollector.head(path, handler);
         return this;
     }
 
     @Override
     public Kitty options(String path, RequestHandler handler) {
-        this.router.options(path, handler);
+        this.routeCollector.options(path, handler);
         return this;
     }
 
     @Override
     public Kitty options(String path, ContextHandler handler) {
-        this.router.options(path, handler);
+        this.routeCollector.options(path, handler);
         return this;
     }
 
     @Override
     public Kitty patch(String path, RequestHandler handler) {
-        this.router.patch(path, handler);
+        this.routeCollector.patch(path, handler);
         return this;
     }
 
     @Override
     public Kitty patch(String path, ContextHandler handler) {
-        this.router.patch(path, handler);
+        this.routeCollector.patch(path, handler);
         return this;
     }
 
     @Override
     public Kitty post(String path, RequestHandler handler) {
-        this.router.post(path, handler);
+        this.routeCollector.post(path, handler);
         return this;
     }
 
     @Override
     public Kitty post(String path, ContextHandler handler) {
-        this.router.post(path, handler);
+        this.routeCollector.post(path, handler);
         return this;
     }
 
     @Override
     public Kitty put(String path, RequestHandler handler) {
-        this.router.put(path, handler);
+        this.routeCollector.put(path, handler);
         return this;
     }
 
     @Override
     public Kitty put(String path, ContextHandler handler) {
-        this.router.put(path, handler);
+        this.routeCollector.put(path, handler);
         return this;
     }
 
     @Override
     public Kitty trace(String path, RequestHandler handler) {
-        this.router.trace(path, handler);
+        this.routeCollector.trace(path, handler);
         return this;
     }
 
     @Override
     public Kitty trace(String path, ContextHandler handler) {
-        this.router.trace(path, handler);
+        this.routeCollector.trace(path, handler);
         return this;
     }
 }

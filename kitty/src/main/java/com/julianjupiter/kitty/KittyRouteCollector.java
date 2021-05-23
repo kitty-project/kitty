@@ -14,7 +14,7 @@ import java.util.Set;
 /**
  * @author Julian Jupiter
  */
-final class KittyRouter implements Router {
+final class KittyRouteCollector implements RouteCollector {
     private final Map<String, List<Route>> routeMap = new HashMap<>();
 
     @Override
@@ -23,14 +23,14 @@ final class KittyRouter implements Router {
     }
 
     @Override
-    public Router any(String path, RequestHandler handler) {
+    public RouteCollector any(String path, RequestHandler handler) {
         Arrays.stream(HttpMethod.values())
                 .forEach(method -> this.createRoute(method, path, handler));
         return this;
     }
 
     @Override
-    public Router any(String path, ContextHandler handler) {
+    public RouteCollector any(String path, ContextHandler handler) {
         var routes = Arrays.stream(HttpMethod.values())
                 .map(method -> this.createRoute(method, path, handler))
                 .toList();
@@ -39,7 +39,7 @@ final class KittyRouter implements Router {
     }
 
     @Override
-    public Router anyOf(Set<HttpMethod> methods, String path, RequestHandler handler) {
+    public RouteCollector anyOf(Set<HttpMethod> methods, String path, RequestHandler handler) {
         var routes = methods.stream()
                 .map(method -> this.createRoute(method, path, handler))
                 .toList();
@@ -48,7 +48,7 @@ final class KittyRouter implements Router {
     }
 
     @Override
-    public Router anyOf(Set<HttpMethod> methods, String path, ContextHandler handler) {
+    public RouteCollector anyOf(Set<HttpMethod> methods, String path, ContextHandler handler) {
         var routes = methods.stream()
                 .map(method -> this.createRoute(method, path, handler))
                 .toList();
@@ -57,112 +57,112 @@ final class KittyRouter implements Router {
     }
 
     @Override
-    public Router delete(String path, RequestHandler handler) {
+    public RouteCollector delete(String path, RequestHandler handler) {
         var route = this.createRoute(HttpMethod.DELETE, path, handler);
         this.addRoute(route);
         return this;
     }
 
     @Override
-    public Router delete(String path, ContextHandler handler) {
+    public RouteCollector delete(String path, ContextHandler handler) {
         var route = this.createRoute(HttpMethod.DELETE, path, handler);
         this.addRoute(route);
         return this;
     }
 
     @Override
-    public Router get(String path, RequestHandler handler) {
+    public RouteCollector get(String path, RequestHandler handler) {
         var route = this.createRoute(HttpMethod.GET, path, handler);
         this.addRoute(route);
         return this;
     }
 
     @Override
-    public Router get(String path, ContextHandler handler) {
+    public RouteCollector get(String path, ContextHandler handler) {
         var route = this.createRoute(HttpMethod.GET, path, handler);
         this.addRoute(route);
         return this;
     }
 
     @Override
-    public Router head(String path, RequestHandler handler) {
+    public RouteCollector head(String path, RequestHandler handler) {
         var route = this.createRoute(HttpMethod.HEAD, path, handler);
         this.addRoute(route);
         return this;
     }
 
     @Override
-    public Router head(String path, ContextHandler handler) {
+    public RouteCollector head(String path, ContextHandler handler) {
         var route = this.createRoute(HttpMethod.HEAD, path, handler);
         this.addRoute(route);
         return this;
     }
 
     @Override
-    public Router options(String path, RequestHandler handler) {
+    public RouteCollector options(String path, RequestHandler handler) {
         var route = this.createRoute(HttpMethod.OPTIONS, path, handler);
         this.addRoute(route);
         return this;
     }
 
     @Override
-    public Router options(String path, ContextHandler handler) {
+    public RouteCollector options(String path, ContextHandler handler) {
         var route = this.createRoute(HttpMethod.OPTIONS, path, handler);
         this.addRoute(route);
         return this;
     }
 
     @Override
-    public Router patch(String path, RequestHandler handler) {
+    public RouteCollector patch(String path, RequestHandler handler) {
         var route = this.createRoute(HttpMethod.PATCH, path, handler);
         this.addRoute(route);
         return this;
     }
 
     @Override
-    public Router patch(String path, ContextHandler handler) {
+    public RouteCollector patch(String path, ContextHandler handler) {
         var route = this.createRoute(HttpMethod.PATCH, path, handler);
         this.addRoute(route);
         return this;
     }
 
     @Override
-    public Router post(String path, RequestHandler handler) {
+    public RouteCollector post(String path, RequestHandler handler) {
         var route = this.createRoute(HttpMethod.POST, path, handler);
         this.addRoute(route);
         return this;
     }
 
     @Override
-    public Router post(String path, ContextHandler handler) {
+    public RouteCollector post(String path, ContextHandler handler) {
         var route = this.createRoute(HttpMethod.POST, path, handler);
         this.addRoute(route);
         return this;
     }
 
     @Override
-    public Router put(String path, RequestHandler handler) {
+    public RouteCollector put(String path, RequestHandler handler) {
         var route = this.createRoute(HttpMethod.PUT, path, handler);
         this.addRoute(route);
         return this;
     }
 
     @Override
-    public Router put(String path, ContextHandler handler) {
+    public RouteCollector put(String path, ContextHandler handler) {
         var route = this.createRoute(HttpMethod.PUT, path, handler);
         this.addRoute(route);
         return this;
     }
 
     @Override
-    public Router trace(String path, RequestHandler handler) {
+    public RouteCollector trace(String path, RequestHandler handler) {
         var route = this.createRoute(HttpMethod.TRACE, path, handler);
         this.addRoute(route);
         return this;
     }
 
     @Override
-    public Router trace(String path, ContextHandler handler) {
+    public RouteCollector trace(String path, ContextHandler handler) {
         var route = this.createRoute(HttpMethod.TRACE, path, handler);
         this.addRoute(route);
         return this;
