@@ -13,11 +13,11 @@ import java.util.UUID;
 public class ServerConfigurationBuilder {
     private static final System.Logger logger = System.getLogger(ServerConfigurationBuilder.class.getName());
     private String name = UUID.randomUUID().toString();
-    private String host = Constants.Server.DEFAULT_HOST;
     private int port = Constants.Server.DEFAULT_PORT;
     private String contextPath = Constants.Server.DEFAULT_CONTEXT_PATH;
 
-    private ServerConfigurationBuilder() {}
+    private ServerConfigurationBuilder() {
+    }
 
     public static ServerConfigurationBuilder create() {
         return new ServerConfigurationBuilder();
@@ -27,17 +27,6 @@ public class ServerConfigurationBuilder {
         if (name != null && !name.isBlank()) {
             this.name = name;
         }
-        return this;
-    }
-
-    public ServerConfigurationBuilder host(String host) {
-        Objects.requireNonNull(host, "host cannot be null");
-
-        if (host.isBlank()) {
-            throw new IllegalArgumentException("host cannot be empty");
-        }
-
-        this.host = host;
         return this;
     }
 
@@ -71,6 +60,6 @@ public class ServerConfigurationBuilder {
     }
 
     public ServerConfiguration build() {
-        return new KittyServerConfiguration(name, host, port, contextPath);
+        return new KittyServerConfiguration(name, ServerConfiguration.host(), port, contextPath);
     }
 }
