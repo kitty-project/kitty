@@ -3,6 +3,7 @@ package com.julianjupiter.kitty;
 import com.julianjupiter.kitty.http.message.HttpMethod;
 import com.julianjupiter.kitty.http.server.ContextHandler;
 import com.julianjupiter.kitty.http.server.RequestHandler;
+import com.julianjupiter.kitty.util.LoggerFactory;
 
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import java.util.Set;
  * @author Julian Jupiter
  */
 final class KittyFramework implements Kitty {
+    private static final System.Logger logger = LoggerFactory.getLogger(KittyFramework.class);
     private final Configuration configuration;
     private final RouteCollector routeCollector;
 
@@ -36,20 +38,31 @@ final class KittyFramework implements Kitty {
 
     @Override
     public void run() throws InterruptedException {
+        try {
+            new NettyHttpServer(this.configuration).run();
+        } catch (InterruptedException exception) {
+            logger.log(System.Logger.Level.ERROR, "An error was encountered, " + exception.getMessage());
+            throw exception;
+        }
     }
 
     @Override
     public void run(int port) throws InterruptedException {
+        this.updateServerPort(port);
+        this.run();
     }
 
     @Override
     public void run(Runnable runnable) throws InterruptedException {
         runnable.run();
+        this.run();
     }
 
     @Override
     public void run(int port, Runnable runnable) throws InterruptedException {
         runnable.run();
+        this.updateServerPort(port);
+        this.run();
     }
 
     @Override
@@ -170,5 +183,15 @@ final class KittyFramework implements Kitty {
     public Kitty trace(String path, ContextHandler handler) {
         this.routeCollector.trace(path, handler);
         return this;
+    }
+
+    private void updateServerPort(int port) {
+        var existingServerConfig = this.configuration.server();
+        var updatedServerConfig = ServerConfiguration.builder()
+                .name(existingServerConfig.name())
+                .port(port)
+                .contextPath(existingServerConfig.contextPath())
+                .build();
+        this.configuration.server(updatedServerConfig);
     }
 }
