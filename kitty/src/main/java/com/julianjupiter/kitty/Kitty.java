@@ -3,12 +3,20 @@ package com.julianjupiter.kitty;
 /**
  * @author Julian Jupiter
  */
-public sealed interface Kitty extends RouterProxy permits KittyFramework {
+public sealed interface Kitty extends KittyRunnable, RouteCollectorProxy<Kitty> permits KittyFramework {
     static Kitty meow() {
         return new KittyFramework();
     }
 
-    void run();
+    static Kitty meow(Configuration configuration) {
+        return new KittyFramework(configuration);
+    }
 
-    void run(Runnable runnable);
+    static Kitty meow(RouteCollector routeCollector) {
+        return new KittyFramework(routeCollector);
+    }
+
+    static Kitty meow(Configuration configuration, RouteCollector routeCollector) {
+        return new KittyFramework(configuration, routeCollector);
+    }
 }

@@ -10,12 +10,12 @@ import java.util.Objects;
 /**
  * @author Julian Jupiter
  */
-record DefaultRequestLine(HttpMethod method, URI target, HttpVersion version) implements RequestLine {
-    DefaultRequestLine(HttpMethod method, URI target) {
+record KittyRequestLine(HttpMethod method, URI target, HttpVersion version) implements RequestLine {
+    KittyRequestLine(HttpMethod method, URI target) {
         this(method, target, null);
     }
 
-    DefaultRequestLine(HttpMethod method, URI target, HttpVersion version) {
+    KittyRequestLine(HttpMethod method, URI target, HttpVersion version) {
         this.method = Objects.requireNonNullElse(method, HttpMethod.GET);
         this.target = Objects.requireNonNull(target, "Request target must not be null");
         this.version = Objects.requireNonNullElse(version, HttpVersion.HTTP_1_1);
