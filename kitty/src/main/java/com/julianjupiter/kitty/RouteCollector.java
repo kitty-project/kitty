@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * @author Julian Jupiter
  */
-public sealed interface RouteCollector extends RouterProxy<RouteCollector> permits KittyRouteCollector {
+public sealed interface RouteCollector extends RouteCollectorProxy<RouteCollector> permits KittyRouteCollector {
     static RouteCollector create() {
         return new KittyRouteCollector();
     }
