@@ -3,6 +3,7 @@ package com.julianjupiter.kitty;
 import com.julianjupiter.kitty.http.message.HttpMethod;
 import com.julianjupiter.kitty.http.server.ContextHandler;
 import com.julianjupiter.kitty.http.server.RequestHandler;
+import com.julianjupiter.kitty.util.Pair;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,16 +11,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author Julian Jupiter
  */
 final class KittyRouteCollector implements RouteCollector {
-    private final Map<String, List<Route>> routeMap = new HashMap<>();
+    private final Map<PathPattern, List<Route>> routeMap = new HashMap<>();
 
     @Override
-    public Map<String, List<Route>> routes() {
-        return Map.copyOf(this.routeMap);
+    public Map<PathMatcher, List<Route>> routes() {
+        var routes = this.routeMap.entrySet().stream()
+                .map(routesEntry -> {
+                    var pathMatcher = PathMatcher.create(routesEntry.getKey());
+                    return new Pair<>(pathMatcher, routesEntry.getValue());
+                })
+                .collect(Collectors.toMap(Pair::first, Pair::second));
+
+        return Map.copyOf(routes);
     }
 
     @Override
@@ -179,7 +188,7 @@ final class KittyRouteCollector implements RouteCollector {
     }
 
     private void addRoute(Route route) {
-        this.routeMap.compute(route.path().value(), (key, value) -> {
+        this.routeMap.compute(route.path(), (key, value) -> {
             if (value == null) {
                 value = new ArrayList<>();
             }
@@ -189,7 +198,7 @@ final class KittyRouteCollector implements RouteCollector {
     }
 
     private void addRoutes(List<Route> routes) {
-        routes.forEach(route -> this.routeMap.compute(route.path().value(), (key, value) -> {
+        routes.forEach(route -> this.routeMap.compute(route.path(), (key, value) -> {
             if (value == null) {
                 value = new ArrayList<>();
             }

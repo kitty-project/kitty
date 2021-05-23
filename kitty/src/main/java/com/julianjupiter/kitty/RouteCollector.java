@@ -11,5 +11,5 @@ public sealed interface RouteCollector extends RouteCollectorProxy<RouteCollecto
         return new KittyRouteCollector();
     }
 
-    Map<String, List<Route>> routes();
+    Map<PathMatcher, List<Route>> routes();
 }
