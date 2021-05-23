@@ -11,7 +11,7 @@ import com.julianjupiter.kitty.http.message.StatusLine;
 /**
  * @author Julian Jupiter
  */
-final class DefaultResponse extends DefaultMessage implements Response {
+final class KittyResponse extends KittyMessage implements Response {
     private StatusLine statusLine = new DefaultStatusLine(HttpStatus.OK);
 
     @Override

@@ -7,7 +7,7 @@ import com.julianjupiter.kitty.http.message.Message;
 /**
  * @author Julian Jupiter
  */
-abstract class DefaultMessage implements Message {
+abstract class KittyMessage implements Message {
 
     @Override
     public HttpHeaders headers() {

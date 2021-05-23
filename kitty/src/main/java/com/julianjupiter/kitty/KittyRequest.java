@@ -11,11 +11,11 @@ import java.net.URI;
 /**
  * @author Julian Jupiter
  */
-final class DefaultRequest extends DefaultMessage implements Request {
+final class KittyRequest extends KittyMessage implements Request {
     private final RequestLine requestLine;
     private final QueryParam[] queryParams;
 
-    DefaultRequest(RequestLine requestLine, QueryParam[] queryParams) {
+    KittyRequest(RequestLine requestLine, QueryParam[] queryParams) {
         this.requestLine = requestLine;
         this.queryParams = queryParams;
     }
