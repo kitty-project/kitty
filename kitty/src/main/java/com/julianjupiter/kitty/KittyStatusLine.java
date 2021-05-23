@@ -9,12 +9,12 @@ import java.util.Objects;
 /**
  * @author Julian Jupiter
  */
-record DefaultStatusLine(HttpStatus status, HttpVersion version) implements StatusLine {
-    DefaultStatusLine(HttpStatus status) {
+record KittyStatusLine(HttpStatus status, HttpVersion version) implements StatusLine {
+    KittyStatusLine(HttpStatus status) {
         this(status, null);
     }
 
-    DefaultStatusLine(HttpStatus status, HttpVersion version) {
+    KittyStatusLine(HttpStatus status, HttpVersion version) {
         this.status = Objects.requireNonNullElse(status, HttpStatus.OK);
         this.version = Objects.requireNonNullElse(version, HttpVersion.HTTP_1_1);
     }

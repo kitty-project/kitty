@@ -12,7 +12,7 @@ import com.julianjupiter.kitty.http.message.StatusLine;
  * @author Julian Jupiter
  */
 final class KittyResponse extends KittyMessage implements Response {
-    private StatusLine statusLine = new DefaultStatusLine(HttpStatus.OK);
+    private StatusLine statusLine = new KittyStatusLine(HttpStatus.OK);
 
     @Override
     public HttpVersion version() {
@@ -26,13 +26,13 @@ final class KittyResponse extends KittyMessage implements Response {
 
     @Override
     public Response status(int statusCode) {
-        this.statusLine = new DefaultStatusLine(HttpStatus.of(statusCode), this.statusLine.version());
+        this.statusLine = new KittyStatusLine(HttpStatus.of(statusCode), this.statusLine.version());
         return this;
     }
 
     @Override
     public Response status(HttpStatus status) {
-        this.statusLine = new DefaultStatusLine(status, this.statusLine.version());
+        this.statusLine = new KittyStatusLine(status, this.statusLine.version());
         return this;
     }
 
