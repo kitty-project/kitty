@@ -5,8 +5,8 @@ import com.julianjupiter.kitty.http.message.QueryParam;
 /**
  * @author Julian Jupiter
  */
-record DefaultQueryParam(String key, String[] values) implements QueryParam {
-    DefaultQueryParam(String key, String value) {
+record KittyQueryParam(String key, String[] values) implements QueryParam {
+    KittyQueryParam(String key, String value) {
         this(key, new String[]{value});
     }
 }
