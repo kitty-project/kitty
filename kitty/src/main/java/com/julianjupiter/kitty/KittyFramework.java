@@ -13,6 +13,10 @@ final class KittyFramework implements Kitty {
     private final Configuration configuration;
     private final Router router;
 
+    static {
+        System.setProperty("java.util.logging.SimpleFormatter.format", "[%1$tF %1$tT] [%4$s] %5$s %n");
+    }
+
     KittyFramework() {
         this(Configuration.create(), Router.create());
     }
