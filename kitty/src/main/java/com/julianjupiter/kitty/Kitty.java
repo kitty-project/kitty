@@ -8,6 +8,10 @@ public sealed interface Kitty extends RouterProxy<Kitty> permits KittyFramework 
         return new KittyFramework();
     }
 
+    static Kitty meow(Configuration configuration) {
+        return new KittyFramework(configuration);
+    }
+
     void run();
 
     void run(Runnable runnable);

@@ -10,6 +10,16 @@ import java.util.Set;
  * @author Julian Jupiter
  */
 final class KittyFramework implements Kitty {
+    private final Configuration configuration;
+
+    public KittyFramework() {
+        this(Configuration.create());
+    }
+
+    public KittyFramework(Configuration configuration) {
+        this.configuration = configuration;
+    }
+
     @Override
     public Kitty get(String path, ContextHandler handler) {
         return this;
