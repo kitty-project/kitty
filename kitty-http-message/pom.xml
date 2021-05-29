@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.julianjupiter.kitty</groupId>
         <artifactId>kitty-parent</artifactId>
-        <version>0.0.1</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>kitty-http-message</artifactId>
