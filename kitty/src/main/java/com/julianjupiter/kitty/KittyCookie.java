@@ -1,7 +1,7 @@
 package com.julianjupiter.kitty;
 
 import com.julianjupiter.kitty.http.message.Cookie;
-import com.julianjupiter.kitty.http.message.util.CookieHeaderNames;
+import com.julianjupiter.kitty.http.message.util.CookieSameSite;
 
 /**
  * @author Julian Jupiter
@@ -14,5 +14,5 @@ record KittyCookie(
         long maxAge,
         boolean secure,
         boolean httpOnly,
-        CookieHeaderNames.SameSite sameSite) implements Cookie {
+        CookieSameSite sameSite) implements Cookie {
 }

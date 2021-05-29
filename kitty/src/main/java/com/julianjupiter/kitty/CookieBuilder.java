@@ -1,7 +1,7 @@
 package com.julianjupiter.kitty;
 
 import com.julianjupiter.kitty.http.message.Cookie;
-import com.julianjupiter.kitty.http.message.util.CookieHeaderNames;
+import com.julianjupiter.kitty.http.message.util.CookieSameSite;
 
 /**
  * @author Julian Jupiter
@@ -14,7 +14,7 @@ public class CookieBuilder implements CookieSetter<CookieBuilder> {
     private long maxMage = -9223372036854775808L;
     private boolean secure;
     private boolean httpOnly;
-    private CookieHeaderNames.SameSite sameSite;
+    private CookieSameSite sameSite;
 
     private CookieBuilder(String name, String value) {
         this.name = name;
@@ -56,7 +56,7 @@ public class CookieBuilder implements CookieSetter<CookieBuilder> {
     }
 
     @Override
-    public CookieBuilder sameSite(CookieHeaderNames.SameSite sameSite) {
+    public CookieBuilder sameSite(CookieSameSite sameSite) {
         this.sameSite = sameSite;
         return this;
     }

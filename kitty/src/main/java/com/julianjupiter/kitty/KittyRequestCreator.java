@@ -4,7 +4,7 @@ import com.julianjupiter.kitty.http.message.Body;
 import com.julianjupiter.kitty.http.message.QueryParam;
 import com.julianjupiter.kitty.http.message.Request;
 import com.julianjupiter.kitty.http.message.RequestLine;
-import com.julianjupiter.kitty.http.message.util.CookieHeaderNames;
+import com.julianjupiter.kitty.http.message.util.CookieSameSite;
 import com.julianjupiter.kitty.http.message.util.HttpMethod;
 import com.julianjupiter.kitty.http.message.util.HttpVersion;
 import com.julianjupiter.kitty.http.message.util.RequestHeaderName;
@@ -93,7 +93,7 @@ final class KittyRequestCreator implements RequestCreator {
                                 if (cookie instanceof DefaultCookie defaultCookie) {
                                     var nettyNameSite = defaultCookie.sameSite();
                                     if (nettyNameSite != null) {
-                                        return cookieBuilder.sameSite(CookieHeaderNames.SameSite.of(nettyNameSite.name()))
+                                        return cookieBuilder.sameSite(CookieSameSite.of(nettyNameSite.name()))
                                             .build();
                                     }
                                 }

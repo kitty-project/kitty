@@ -1,6 +1,6 @@
 package com.julianjupiter.kitty;
 
-import com.julianjupiter.kitty.http.message.util.CookieHeaderNames;
+import com.julianjupiter.kitty.http.message.util.CookieSameSite;
 
 /**
  * @author Julian Jupiter
@@ -16,5 +16,5 @@ interface CookieSetter<T> {
 
     T httpOnly(boolean httpOnly);
 
-    T sameSite(CookieHeaderNames.SameSite sameSite);
+    T sameSite(CookieSameSite sameSite);
 }
