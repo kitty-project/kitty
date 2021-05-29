@@ -1,9 +1,9 @@
 package com.julianjupiter.kitty;
 
-import com.julianjupiter.kitty.http.message.HttpMethod;
+import com.julianjupiter.kitty.http.message.util.HttpMethod;
 
 /**
  * @author Julian Jupiter
  */
-public final record KittyRoute(HttpMethod method, PathPattern path, Handler handler) implements Route {
+public final record KittyRoute(HttpMethod method, String path, Handler handler) implements Route {
 }

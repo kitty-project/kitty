@@ -1,4 +1,4 @@
-package com.julianjupiter.kitty.http.message;
+package com.julianjupiter.kitty.http.message.util;
 
 import java.util.Arrays;
 

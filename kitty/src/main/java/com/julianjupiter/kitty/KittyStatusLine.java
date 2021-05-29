@@ -1,7 +1,7 @@
 package com.julianjupiter.kitty;
 
-import com.julianjupiter.kitty.http.message.HttpStatus;
-import com.julianjupiter.kitty.http.message.HttpVersion;
+import com.julianjupiter.kitty.http.message.util.HttpStatus;
+import com.julianjupiter.kitty.http.message.util.HttpVersion;
 import com.julianjupiter.kitty.http.message.StatusLine;
 
 import java.util.Objects;

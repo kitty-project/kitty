@@ -12,11 +12,11 @@ public sealed interface Kitty extends KittyRunnable, RouteCollectorProxy<Kitty> 
         return new KittyFramework(configuration);
     }
 
-    static Kitty meow(RouteCollector routeCollector) {
-        return new KittyFramework(routeCollector);
+    static Kitty meow(Router router) {
+        return new KittyFramework(router);
     }
 
-    static Kitty meow(Configuration configuration, RouteCollector routeCollector) {
-        return new KittyFramework(configuration, routeCollector);
+    static Kitty meow(Configuration configuration, Router router) {
+        return new KittyFramework(configuration, router);
     }
 }

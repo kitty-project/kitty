@@ -3,5 +3,21 @@ package com.julianjupiter.kitty;
 /**
  * @author Julian Jupiter
  */
-record KittyConfiguration(ServerConfiguration server) implements Configuration {
+class KittyConfiguration implements Configuration {
+    private ServerConfiguration serverConfiguration;
+
+    public KittyConfiguration(ServerConfiguration serverConfiguration) {
+        this.serverConfiguration = serverConfiguration;
+    }
+
+    @Override
+    public ServerConfiguration server() {
+        return serverConfiguration;
+    }
+
+    @Override
+    public Configuration server(ServerConfiguration serverConfiguration) {
+        this.serverConfiguration = serverConfiguration;
+        return this;
+    }
 }

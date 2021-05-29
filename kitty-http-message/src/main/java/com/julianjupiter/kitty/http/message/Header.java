@@ -3,4 +3,8 @@ package com.julianjupiter.kitty.http.message;
 /**
  * @author Julian Jupiter
  */
-public record HttpHeader(String name, String value) {}
+public interface Header {
+    String name();
+
+    String value();
+}

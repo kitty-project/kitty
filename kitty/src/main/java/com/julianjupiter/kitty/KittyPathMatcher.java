@@ -6,18 +6,12 @@ import java.util.regex.Pattern;
 /**
  * @author Julian Jupiter
  */
-class KittyPathMatcher implements PathMatcher {
-    private final PathPattern pattern;
-
-    public KittyPathMatcher(PathPattern pattern) {
-        this.pattern = pattern;
-    }
-
+final record KittyPathMatcher(String pattern) implements PathMatcher {
     @Override
-    public MatchResult match(String path) {
-        Objects.requireNonNull(path, "path cannot be null");
+    public MatchResult match(String requestPath) {
+        Objects.requireNonNull(requestPath, "requestPath cannot be null");
 
-        boolean matched = Pattern.matches(pattern.value(), path);
+        boolean matched = Pattern.matches(this.pattern, requestPath);
 
         if (matched) {
             return PositiveResult.create(null);
