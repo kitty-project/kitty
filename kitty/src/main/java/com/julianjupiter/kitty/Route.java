@@ -1,14 +1,14 @@
 package com.julianjupiter.kitty;
 
-import com.julianjupiter.kitty.http.message.HttpMethod;
+import com.julianjupiter.kitty.http.message.util.HttpMethod;
 
 /**
  * @author Julian Jupiter
  */
-public sealed interface Route permits KittyRoute {
+public sealed interface Route permits KittyHttpMethodNotAllowedRoute, KittyNotFoundRoute, KittyRoute {
     HttpMethod method();
 
-    PathPattern path();
+    String path();
 
     Handler handler();
 }

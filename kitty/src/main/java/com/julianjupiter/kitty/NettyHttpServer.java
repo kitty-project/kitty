@@ -11,9 +11,9 @@ import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.SelfSignedCertificate;
 
 import javax.net.ssl.SSLException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.security.cert.CertificateException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Julian Jupiter
@@ -21,10 +21,12 @@ import java.security.cert.CertificateException;
 class NettyHttpServer implements HttpServer {
     private static final System.Logger logger = LoggerFactory.getLogger(NettyHttpServer.class);
     private final Configuration configuration;
+    private final Map<String, List<Route>> routes;
     private static final boolean SSL = System.getProperty("ssl") != null;
 
-    public NettyHttpServer(Configuration configuration) {
+    public NettyHttpServer(Configuration configuration, Map<String, List<Route>> routes) {
         this.configuration = configuration;
+        this.routes = routes;
     }
 
     @Override
@@ -47,7 +49,7 @@ class NettyHttpServer implements HttpServer {
             serverBootstrap.group(bossEventLoopGroup, workerEventLoopGroup)
                     .channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.INFO))
-                    .childHandler(new HttpServerInitializer(this.configuration, sslContext));
+                    .childHandler(new HttpServerInitializer(this.configuration, this.routes, sslContext));
             var serverConfiguration = this.configuration.server();
             var hostAddress = serverConfiguration.hostAddress();
             var port = serverConfiguration.port();

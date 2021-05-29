@@ -2,101 +2,51 @@ package com.julianjupiter.kitty;
 
 import com.julianjupiter.kitty.http.message.Header;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author Julian Jupiter
  */
-public final class HttpHeaders {
-    private final Map<String, List<Header>> headerMap = new HashMap<>();
+final class KittyHttpHeaders {
+    private final Set<Header> headerSet = new HashSet<>();
 
-    private HttpHeaders() {
+    private KittyHttpHeaders() {
     }
 
-    public static HttpHeaders create() {
-        return new HttpHeaders();
+    public static KittyHttpHeaders create() {
+        return new KittyHttpHeaders();
     }
 
-    public HttpHeaders add(String name, String value) {
-
-        headerMap.compute(name, (n, httpHeaders) -> {
-            if (httpHeaders == null) {
-                httpHeaders = new ArrayList<>();
-            }
-
-            var headerOptional = httpHeaders.stream()
-                    .filter(httpHeader -> httpHeader.value().equals(value))
-                    .findFirst();
-            if (headerOptional.isEmpty()) {
-                var httpHeader = new Header(name, value);
-                httpHeaders.add(httpHeader);
-            }
-
-            return httpHeaders;
-        });
+    public KittyHttpHeaders add(String name, String value) {
+        this.headerSet.add(new KittyHeader(name, value));
 
         return this;
     }
 
-    public HttpHeaders add(Header header) {
-        headerMap.compute(header.name(), (n, httpHeaders) -> {
-            if (httpHeaders == null) {
-                httpHeaders = new ArrayList<>();
-            }
-
-            var headerOptional = httpHeaders.stream()
-                    .filter(httpHeader -> httpHeader.value().equals(header.value()))
-                    .findFirst();
-            if (headerOptional.isEmpty()) {
-                httpHeaders.add(header);
-            }
-
-            return httpHeaders;
-        });
+    public KittyHttpHeaders add(Header header) {
+        this.headerSet.add(header);
 
         return this;
     }
 
-    public HttpHeaders replace(String name, String value) {
-        headerMap.compute(name, (n, v) -> {
-            var headers = new ArrayList<Header>();
-            headers.add(new Header(name, value));
-            return headers;
-        });
+    public KittyHttpHeaders add(Header[] headers) {
+        var collection = Arrays.stream(headers).collect(Collectors.toUnmodifiableSet());
+        this.headerSet.addAll(collection);
+
         return this;
     }
 
-    public HttpHeaders replace(Header header) {
-        headerMap.compute(header.name(), (name, value) -> {
-            var headers = new ArrayList<Header>();
-            headers.add(header);
-            return headers;
-        });
-        return this;
+    public Set<Header> get() {
+        return this.headerSet;
     }
 
-    public HttpHeaders remove(String name) {
-        this.headerMap.remove(name);
-        return this;
-    }
-
-    public HttpHeaders remove(Header header) {
-        if (header == null) {
-            this.headerMap.remove(null);
-        } else {
-            this.headerMap.remove(header.name());
-        }
-        return this;
-    }
-
-    public Map<String, List<Header>> get() {
-        return this.headerMap;
-    }
-
-    public List<Header> get(String name) {
-        return this.headerMap.getOrDefault(name, List.of());
+    public Optional<Header> get(String name) {
+        return this.headerSet.stream()
+                .filter(header -> header.name().equals(name))
+                .findFirst();
     }
 }

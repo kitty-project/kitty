@@ -6,10 +6,10 @@ import java.util.Map;
 /**
  * @author Julian Jupiter
  */
-public sealed interface RouteCollector extends RouteCollectorProxy<RouteCollector> permits KittyRouteCollector {
-    static RouteCollector create() {
-        return new KittyRouteCollector();
+public sealed interface Router extends RouteCollectorProxy<Router> permits KittyRouter {
+    static Router create() {
+        return new KittyRouter();
     }
 
-    Map<PathMatcher, List<Route>> routes();
+    Map<String, List<Route>> routes();
 }

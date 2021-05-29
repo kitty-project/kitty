@@ -1,4 +1,4 @@
-package com.julianjupiter.kitty.http;
+package com.julianjupiter.kitty.http.message;
 
 /**
  * @author Julian Jupiter

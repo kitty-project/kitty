@@ -1,7 +1,4 @@
-package com.julianjupiter.kitty.http;
-
-import com.julianjupiter.kitty.http.message.Request;
-import com.julianjupiter.kitty.http.message.Response;
+package com.julianjupiter.kitty.http.message;
 
 /**
  * @author Julian Jupiter

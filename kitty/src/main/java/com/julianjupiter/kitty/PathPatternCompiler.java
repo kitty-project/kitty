@@ -1,9 +1,9 @@
 package com.julianjupiter.kitty;
 
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author Julian Jupiter
@@ -12,10 +12,10 @@ class PathPatternCompiler {
     private PathPatternCompiler() {
     }
 
-    public static PathMatcher compile(PathPattern pattern) {
-        Objects.requireNonNull(pattern, "pattern cannot be null!");
+    public static String compile(String path) {
+        Objects.requireNonNull(path, "path cannot be null!");
 
-        var compiledPathPattern = Stream.of(pattern.value().split("/"))
+        return Arrays.stream(path.split("/"))
                 .map(segment -> {
                     if (segment.startsWith("{") && segment.endsWith("}")) {
                         if (segment.length() == 2) {
@@ -34,8 +34,6 @@ class PathPatternCompiler {
                     }
                 })
                 .collect(Collectors.joining("/"));
-
-        return new KittyPathMatcher(new PathPattern(compiledPathPattern));
     }
 
     private static int indexOf(String string) {

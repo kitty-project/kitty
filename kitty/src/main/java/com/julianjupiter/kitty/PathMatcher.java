@@ -3,10 +3,12 @@ package com.julianjupiter.kitty;
 /**
  * @author Julian Jupiter
  */
-public interface PathMatcher {
-    static PathMatcher create(PathPattern pattern) {
-        return PathPatternCompiler.compile(pattern);
+public sealed interface PathMatcher permits KittyPathMatcher {
+    static PathMatcher create(String pattern) {
+        return new KittyPathMatcher(pattern);
     }
+
+    String pattern();
 
     MatchResult match(String path);
 }

@@ -1,6 +1,6 @@
 package com.julianjupiter.kitty;
 
-import com.julianjupiter.kitty.http.message.HttpMethod;
+import com.julianjupiter.kitty.http.message.util.HttpMethod;
 import com.julianjupiter.kitty.http.server.ContextHandler;
 import com.julianjupiter.kitty.http.server.RequestHandler;
 
