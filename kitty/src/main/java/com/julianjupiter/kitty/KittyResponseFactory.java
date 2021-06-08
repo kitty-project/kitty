@@ -7,9 +7,9 @@ import com.julianjupiter.kitty.http.message.Response;
 /**
  * @author Julian Jupiter
  */
-final record KittyResponseCreator(Request request) implements ResponseCreator {
+final class KittyResponseFactory implements ResponseFactory {
     @Override
-    public Response createKittyResponse() {
-        return new KittyResponse(new KittyStatusLine(HttpStatus.OK, this.request.version()));
+    public Response createResponse(Request request) {
+        return new KittyResponse(new KittyStatusLine(HttpStatus.OK, request.version()));
     }
 }

@@ -1,4 +1,4 @@
-package com.julianjupiter.kitty.http.message;
+package com.julianjupiter.kitty;
 
 import com.julianjupiter.kitty.http.message.util.HttpStatus;
 import com.julianjupiter.kitty.http.message.util.HttpVersion;
@@ -6,7 +6,7 @@ import com.julianjupiter.kitty.http.message.util.HttpVersion;
 /**
  * @author Julian Jupiter
  */
-public interface StatusLine {
+interface StatusLine {
     HttpVersion version();
 
     HttpStatus status();

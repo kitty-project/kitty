@@ -3,7 +3,7 @@ package com.julianjupiter.kitty;
 /**
  * @author Julian Jupiter
  */
-public interface KittyRunnable {
+interface KittyRunnable {
     void run() throws InterruptedException;
 
     void run(int port) throws InterruptedException;

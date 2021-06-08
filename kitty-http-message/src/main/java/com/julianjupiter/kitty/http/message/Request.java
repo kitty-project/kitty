@@ -12,7 +12,7 @@ public interface Request extends Message {
 
     URI target();
 
-    RequestLine requestLine();
+    QueryParam queryParam(String name);
 
     QueryParam[] queryParams();
 }

@@ -42,11 +42,11 @@ class NettyHttpServer implements HttpServer {
             }
         }
 
-        var bossEventLoopGroup = new NioEventLoopGroup(1);
+        var masterEventLoopGroup = new NioEventLoopGroup(1);
         var workerEventLoopGroup = new NioEventLoopGroup();
         try {
             var serverBootstrap = new ServerBootstrap();
-            serverBootstrap.group(bossEventLoopGroup, workerEventLoopGroup)
+            serverBootstrap.group(masterEventLoopGroup, workerEventLoopGroup)
                     .channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.INFO))
                     .childHandler(new HttpServerInitializer(this.configuration, this.routes, sslContext));
@@ -63,7 +63,7 @@ class NettyHttpServer implements HttpServer {
             channel.closeFuture()
                     .sync();
         } finally {
-            bossEventLoopGroup.shutdownGracefully();
+            masterEventLoopGroup.shutdownGracefully();
             workerEventLoopGroup.shutdownGracefully();
         }
     }

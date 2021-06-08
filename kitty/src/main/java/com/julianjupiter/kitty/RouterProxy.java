@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * @author Julian Jupiter
  */
-public interface RouteCollectorProxy<T> {
+interface RouterProxy<T> {
     T any(String path, RequestHandler handler);
 
     T any(String path, ContextHandler handler);

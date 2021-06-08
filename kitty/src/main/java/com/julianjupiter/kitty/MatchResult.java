@@ -2,7 +2,7 @@ package com.julianjupiter.kitty;
 
 import java.util.Map;
 
-public interface MatchResult {
+interface MatchResult {
     boolean matches();
 
     Map<String, String> params();
