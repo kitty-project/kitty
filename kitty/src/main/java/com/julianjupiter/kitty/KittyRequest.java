@@ -7,6 +7,7 @@ import com.julianjupiter.kitty.http.message.util.HttpMethod;
 
 import java.net.URI;
 import java.util.Arrays;
+import java.util.Optional;
 
 /**
  * @author Julian Jupiter
@@ -34,15 +35,14 @@ final class KittyRequest extends KittyMessage implements Request {
     }
 
     @Override
-    public QueryParam queryParam(String name) {
+    public Optional<QueryParam> queryParam(String name) {
         if (name == null || name.isBlank()) {
-            return null;
+            return Optional.empty();
         }
 
         return Arrays.stream(this.queryParams)
                 .filter(queryParam -> queryParam.name().equals(name))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 
     @Override
