@@ -5,7 +5,7 @@ import com.julianjupiter.kitty.http.message.util.HttpStatus;
 /**
  * @author Julian Jupiter
  */
-public interface Response extends Mesgit sage {
+public interface Response extends Message {
     HttpStatus status();
 
     Response status(int statusCode);
