@@ -7,6 +7,6 @@ import com.julianjupiter.kitty.http.message.Response;
  * @author Julian Jupiter
  */
 @FunctionalInterface
-public interface Handler {
+interface Handler {
     Response handle(Request request, Response response);
 }
