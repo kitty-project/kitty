@@ -4,9 +4,7 @@ import com.julianjupiter.kitty.http.message.Body;
 import com.julianjupiter.kitty.http.message.Cookie;
 import com.julianjupiter.kitty.http.message.Header;
 import com.julianjupiter.kitty.http.message.Response;
-import com.julianjupiter.kitty.http.message.StatusLine;
 import com.julianjupiter.kitty.http.message.util.HttpStatus;
-import com.julianjupiter.kitty.http.message.util.HttpVersion;
 import com.julianjupiter.kitty.util.LoggerFactory;
 import io.netty.buffer.Unpooled;
 
@@ -19,37 +17,28 @@ import java.io.ObjectOutputStream;
  */
 final class KittyResponse extends KittyMessage implements Response {
     private static final System.Logger logger = LoggerFactory.getLogger(KittyResponse.class);
-    private StatusLine statusLine;
+    private HttpStatus status;
 
     KittyResponse(StatusLine statusLine) {
-        this.statusLine = statusLine;
-    }
-
-    @Override
-    public HttpVersion version() {
-        return this.statusLine.version();
+        super(statusLine.version());
+        this.status = statusLine.status();
     }
 
     @Override
     public HttpStatus status() {
-        return this.statusLine.status();
+        return this.status;
     }
 
     @Override
     public Response status(int statusCode) {
-        this.statusLine = new KittyStatusLine(HttpStatus.of(statusCode), this.statusLine.version());
+        this.status = HttpStatus.of(statusCode);
         return this;
     }
 
     @Override
     public Response status(HttpStatus status) {
-        this.statusLine = new KittyStatusLine(status, this.statusLine.version());
+        this.status = status;
         return this;
-    }
-
-    @Override
-    public StatusLine statusLine() {
-        return this.statusLine;
     }
 
     @Override

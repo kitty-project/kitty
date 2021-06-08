@@ -3,7 +3,7 @@ package com.julianjupiter.kitty;
 /**
  * @author Julian Jupiter
  */
-public sealed interface Kitty extends KittyRunnable, RouteCollectorProxy<Kitty> permits KittyFramework {
+public sealed interface Kitty extends KittyRunnable, RouterProxy<Kitty> permits KittyFramework {
     static Kitty meow() {
         return new KittyFramework();
     }

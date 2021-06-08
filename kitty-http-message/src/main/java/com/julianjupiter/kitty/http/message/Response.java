@@ -12,8 +12,6 @@ public interface Response extends Message {
 
     Response status(HttpStatus status);
 
-    StatusLine statusLine();
-
     Response header(String name, String value);
 
     Response header(Header header);

@@ -14,11 +14,17 @@ import java.util.stream.Collectors;
 final class KittyHttpHeaders {
     private final Set<Header> headerSet = new HashSet<>();
 
-    private KittyHttpHeaders() {
+    private KittyHttpHeaders(Header[] headers) {
+        var collection = Arrays.stream(headers).collect(Collectors.toUnmodifiableSet());
+        this.headerSet.addAll(collection);
     }
 
     public static KittyHttpHeaders create() {
-        return new KittyHttpHeaders();
+        return new KittyHttpHeaders(new Header[0]);
+    }
+
+    public static KittyHttpHeaders create(Header[] headers) {
+        return new KittyHttpHeaders(headers);
     }
 
     public KittyHttpHeaders add(String name, String value) {

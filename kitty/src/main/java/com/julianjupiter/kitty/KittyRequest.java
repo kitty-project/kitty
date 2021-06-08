@@ -1,46 +1,48 @@
 package com.julianjupiter.kitty;
 
 import com.julianjupiter.kitty.http.message.Body;
-import com.julianjupiter.kitty.http.message.Cookie;
 import com.julianjupiter.kitty.http.message.QueryParam;
 import com.julianjupiter.kitty.http.message.Request;
-import com.julianjupiter.kitty.http.message.RequestLine;
 import com.julianjupiter.kitty.http.message.util.HttpMethod;
-import com.julianjupiter.kitty.http.message.util.HttpVersion;
 
 import java.net.URI;
+import java.util.Arrays;
+import java.util.Optional;
 
 /**
  * @author Julian Jupiter
  */
 final class KittyRequest extends KittyMessage implements Request {
-    private final RequestLine requestLine;
+    private final HttpMethod method;
+    private final URI target;
     private final QueryParam[] queryParams;
 
     KittyRequest(RequestLine requestLine, QueryParam[] queryParams, KittyHttpHeaders httpHeaders, KittyHttpCookies kittyHttpCookies, Body body) {
-        super(httpHeaders, kittyHttpCookies, body);
-        this.requestLine = requestLine;
+        super(requestLine.version(), httpHeaders, kittyHttpCookies, body);
+        this.method = requestLine.method();
+        this.target = requestLine.target();
         this.queryParams = queryParams;
     }
 
     @Override
-    public HttpVersion version() {
-        return this.requestLine.version();
-    }
-
-    @Override
     public HttpMethod method() {
-        return this.requestLine.method();
+        return this.method;
     }
 
     @Override
     public URI target() {
-        return this.requestLine.target();
+        return this.target;
     }
 
     @Override
-    public RequestLine requestLine() {
-        return this.requestLine;
+    public Optional<QueryParam> queryParam(String name) {
+        if (name == null || name.isBlank()) {
+            return Optional.empty();
+        }
+
+        return Arrays.stream(this.queryParams)
+                .filter(queryParam -> queryParam.name().equals(name))
+                .findFirst();
     }
 
     @Override

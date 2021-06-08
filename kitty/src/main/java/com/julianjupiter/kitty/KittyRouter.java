@@ -24,8 +24,10 @@ final class KittyRouter implements Router {
 
     @Override
     public Router any(String path, RequestHandler handler) {
-        Arrays.stream(HttpMethod.values())
-                .forEach(method -> this.createRoute(method, path, handler));
+        var routes = Arrays.stream(HttpMethod.values())
+                .map(method -> this.createRoute(method, path, handler))
+                .toList();
+        this.addRoutes(routes);
         return this;
     }
 

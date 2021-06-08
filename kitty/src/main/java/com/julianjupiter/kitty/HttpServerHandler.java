@@ -31,12 +31,11 @@ import java.util.Map;
  * @author Julian Jupiter
  */
 @ChannelHandler.Sharable
-public class HttpServerHandler extends SimpleChannelInboundHandler<Object> {
+class HttpServerHandler extends SimpleChannelInboundHandler<Object> {
     private static final System.Logger logger = LoggerFactory.getLogger(HttpServerHandler.class);
     private final Configuration configuration;
     private final Map<String, List<Route>> routes;
-    private HttpRequest request;
-    private HttpContent content;
+    private HttpRequest nettyHttpRequest;
     private Response response;
     private final StringBuilder responseData = new StringBuilder();
 
@@ -47,25 +46,22 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<Object> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext context, Object message) {
-        final var requestCreator = RequestCreator.create();
+        final var requestFactory = RequestFactory.create();
         if (message instanceof HttpRequest httpRequest) {
-            this.request = httpRequest;
+            this.nettyHttpRequest = httpRequest;
             if (HttpUtil.is100ContinueExpected(httpRequest)) {
                 writeResponse(context);
             }
         }
 
         if (message instanceof HttpContent httpContent) {
-            this.content = httpContent;
             if (message instanceof LastHttpContent trailer) {
-                requestCreator.nettyHttpRequest(this.request);
-                requestCreator.nettyHttpContent(this.content);
-                var kittyRequest = requestCreator.createKittyRequest();
+                var kittyRequest = requestFactory.createRequest(this.nettyHttpRequest, httpContent);
                 var route = this.route(kittyRequest);
                 var handler = route.handler();
-                var initialResponse = ResponseCreator.create(kittyRequest)
-                        .createKittyResponse();
-                this.response = handler.handle(requestCreator.createKittyRequest(), initialResponse);
+                var initialResponse = ResponseFactory.create()
+                        .createResponse(kittyRequest);
+                this.response = handler.handle(kittyRequest, initialResponse);
                 writeResponse(context, trailer);
             }
         }
@@ -92,7 +88,7 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<Object> {
         this.responseData.setLength(0);
         this.responseData.append(this.response.body() != null && this.response.body().isReadable() ? this.response.body().toString() : "");
 
-        boolean keepAlive = HttpUtil.isKeepAlive(this.request);
+        boolean keepAlive = HttpUtil.isKeepAlive(this.nettyHttpRequest);
 
         FullHttpResponse httpResponse = new DefaultFullHttpResponse(
                 HttpVersion.HTTP_1_1,
