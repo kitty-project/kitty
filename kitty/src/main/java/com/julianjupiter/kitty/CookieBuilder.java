@@ -6,7 +6,7 @@ import com.julianjupiter.kitty.http.message.util.CookieSameSite;
 /**
  * @author Julian Jupiter
  */
-public class CookieBuilder implements CookieSetter<CookieBuilder> {
+public final class CookieBuilder implements CookieSetter<CookieBuilder>, Builder<Cookie> {
     private final String name;
     private final String value;
     private String domain;
@@ -61,6 +61,7 @@ public class CookieBuilder implements CookieSetter<CookieBuilder> {
         return this;
     }
 
+    @Override
     public Cookie build() {
         return new KittyCookie(
                 this.name,
