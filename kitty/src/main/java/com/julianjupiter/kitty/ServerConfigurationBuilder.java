@@ -13,7 +13,7 @@ import java.util.UUID;
 /**
  * @author Julian Jupiter
  */
-public class ServerConfigurationBuilder {
+public final class ServerConfigurationBuilder implements Builder<ServerConfiguration> {
     private static final System.Logger logger = System.getLogger(ServerConfigurationBuilder.class.getName());
     private String name = UUID.randomUUID().toString();
     private int port = Constants.Server.DEFAULT_PORT;
@@ -62,6 +62,7 @@ public class ServerConfigurationBuilder {
         return this;
     }
 
+    @Override
     public ServerConfiguration build() {
         return new KittyServerConfiguration(name, KittyUtil.Server.hostAddress(), port, contextPath);
     }

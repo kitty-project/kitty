@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * @author Julian Jupiter
  */
-public class ConfigurationBuilder {
+public final class ConfigurationBuilder implements Builder<Configuration> {
     private ServerConfiguration serverConfiguration = ServerConfiguration.create();
 
     private ConfigurationBuilder() {
@@ -22,6 +22,7 @@ public class ConfigurationBuilder {
         return this;
     }
 
+    @Override
     public Configuration build() {
         return new KittyConfiguration(this.serverConfiguration);
     }
