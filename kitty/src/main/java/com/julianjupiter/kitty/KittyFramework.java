@@ -13,18 +13,18 @@ import java.util.Set;
 final class KittyFramework implements Kitty {
     private static final System.Logger logger = LoggerFactory.getLogger(KittyFramework.class);
     private final Configuration configuration;
-    private final Router router;
+    private final RouterBuilder routerBuilder;
 
     static {
         System.setProperty("java.util.logging.SimpleFormatter.format", "[%1$tF %1$tT] [%4$s] %5$s %n");
     }
 
     KittyFramework() {
-        this(Configuration.create(), Router.create());
+        this(Configuration.create());
     }
 
     KittyFramework(Configuration configuration) {
-        this(configuration, Router.create());
+        this(configuration, RouterBuilder.create().build());
     }
 
     KittyFramework(Router router) {
@@ -33,13 +33,13 @@ final class KittyFramework implements Kitty {
 
     KittyFramework(Configuration configuration, Router router) {
         this.configuration = configuration;
-        this.router = router;
+        this.routerBuilder = RouterBuilder.create(router);
     }
 
     @Override
     public void run() throws InterruptedException {
         try {
-            new NettyHttpServer(this.configuration, this.router.routes()).run();
+            new NettyHttpServer(this.configuration, this.routerBuilder.build().routes()).run();
         } catch (InterruptedException exception) {
             logger.log(System.Logger.Level.ERROR, "An error was encountered, " + exception.getMessage());
             throw exception;
@@ -66,122 +66,140 @@ final class KittyFramework implements Kitty {
     }
 
     @Override
+    public Kitty route(HttpMethod method, String path, RequestHandler handler) {
+        this.routerBuilder.route(method, path, handler);
+        return this;
+    }
+
+    @Override
+    public Kitty route(HttpMethod method, String path, ContextHandler handler) {
+        this.routerBuilder.route(method, path, handler);
+        return this;
+    }
+
+    @Override
     public Kitty any(String path, RequestHandler handler) {
-        this.router.any(path, handler);
+        this.routerBuilder.any(path, handler);
         return this;
     }
 
     @Override
     public Kitty any(String path, ContextHandler handler) {
-        this.router.any(path, handler);
+        this.routerBuilder.any(path, handler);
         return this;
     }
 
     @Override
     public Kitty anyOf(Set<HttpMethod> methods, String path, RequestHandler handler) {
-        this.router.anyOf(methods, path, handler);
+        this.routerBuilder.anyOf(methods, path, handler);
         return this;
     }
 
     @Override
     public Kitty anyOf(Set<HttpMethod> methods, String path, ContextHandler handler) {
-        this.router.anyOf(methods, path, handler);
+        this.routerBuilder.anyOf(methods, path, handler);
         return this;
     }
 
     @Override
     public Kitty delete(String path, RequestHandler handler) {
-        this.router.delete(path, handler);
+        this.routerBuilder.delete(path, handler);
         return this;
     }
 
     @Override
     public Kitty delete(String path, ContextHandler handler) {
-        this.router.delete(path, handler);
+        this.routerBuilder.delete(path, handler);
         return this;
     }
 
     @Override
     public Kitty get(String path, RequestHandler handler) {
-        this.router.get(path, handler);
+        this.routerBuilder.get(path, handler);
         return this;
     }
 
     @Override
     public Kitty get(String path, ContextHandler handler) {
-        this.router.get(path, handler);
+        this.routerBuilder.get(path, handler);
         return this;
     }
 
     @Override
     public Kitty head(String path, RequestHandler handler) {
-        this.router.any(path, handler);
+        this.routerBuilder.head(path, handler);
         return this;
     }
 
     @Override
     public Kitty head(String path, ContextHandler handler) {
-        this.router.head(path, handler);
+        this.routerBuilder.head(path, handler);
         return this;
     }
 
     @Override
     public Kitty options(String path, RequestHandler handler) {
-        this.router.options(path, handler);
+        this.routerBuilder.options(path, handler);
         return this;
     }
 
     @Override
     public Kitty options(String path, ContextHandler handler) {
-        this.router.options(path, handler);
+        this.routerBuilder.options(path, handler);
         return this;
     }
 
     @Override
     public Kitty patch(String path, RequestHandler handler) {
-        this.router.patch(path, handler);
+        this.routerBuilder.patch(path, handler);
         return this;
     }
 
     @Override
     public Kitty patch(String path, ContextHandler handler) {
-        this.router.patch(path, handler);
+        this.routerBuilder.patch(path, handler);
         return this;
     }
 
     @Override
     public Kitty post(String path, RequestHandler handler) {
-        this.router.post(path, handler);
+        this.routerBuilder.post(path, handler);
         return this;
     }
 
     @Override
     public Kitty post(String path, ContextHandler handler) {
-        this.router.post(path, handler);
+        this.routerBuilder.post(path, handler);
         return this;
     }
 
     @Override
     public Kitty put(String path, RequestHandler handler) {
-        this.router.put(path, handler);
+        this.routerBuilder.put(path, handler);
         return this;
     }
 
     @Override
     public Kitty put(String path, ContextHandler handler) {
-        this.router.put(path, handler);
+        this.routerBuilder.put(path, handler);
         return this;
     }
 
     @Override
     public Kitty trace(String path, RequestHandler handler) {
-        this.router.trace(path, handler);
+        this.routerBuilder.trace(path, handler);
         return this;
     }
 
     @Override
     public Kitty trace(String path, ContextHandler handler) {
-        this.router.trace(path, handler);
+        this.routerBuilder.trace(path, handler);
+        return this;
+    }
+
+    @Override
+    public Kitty group(String path, RouteGroupHandler handler) {
+        this.routerBuilder.group(path, handler);
         return this;
     }
 

@@ -7,8 +7,8 @@ import java.util.Map;
  * @author Julian Jupiter
  */
 public sealed interface Router extends RouterProxy<Router> permits KittyRouter {
-    static Router create() {
-        return new KittyRouter();
+    static RouterBuilder builder() {
+        return RouterBuilder.create();
     }
 
     Map<String, List<Route>> routes();

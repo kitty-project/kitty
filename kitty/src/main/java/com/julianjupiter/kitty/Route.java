@@ -5,7 +5,7 @@ import com.julianjupiter.kitty.http.message.util.HttpMethod;
 /**
  * @author Julian Jupiter
  */
-sealed interface Route permits KittyHttpMethodNotAllowedRoute, KittyNotFoundRoute, KittyRoute {
+public sealed interface Route permits KittyHttpMethodNotAllowedRoute, KittyNotFoundRoute, KittyRoute {
     HttpMethod method();
 
     String path();

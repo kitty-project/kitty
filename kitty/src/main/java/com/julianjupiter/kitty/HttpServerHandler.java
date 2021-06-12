@@ -2,6 +2,7 @@ package com.julianjupiter.kitty;
 
 import com.julianjupiter.kitty.http.message.Request;
 import com.julianjupiter.kitty.http.message.Response;
+import com.julianjupiter.kitty.http.message.util.HttpMethod;
 import com.julianjupiter.kitty.util.LoggerFactory;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
@@ -152,6 +153,10 @@ class HttpServerHandler extends SimpleChannelInboundHandler<Object> {
         return foundRoutes.stream()
                 .filter(route -> route.method() == request.method())
                 .findFirst()
-                .orElse(new KittyHttpMethodNotAllowedRoute());
+                .orElse(new KittyHttpMethodNotAllowedRoute(foundRoutes.stream()
+                        .map(Route::method)
+                        .toList()
+                        .toArray(new HttpMethod[0]))
+                );
     }
 }

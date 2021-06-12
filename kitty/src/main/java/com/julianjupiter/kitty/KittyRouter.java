@@ -3,6 +3,7 @@ package com.julianjupiter.kitty;
 import com.julianjupiter.kitty.http.message.util.HttpMethod;
 import com.julianjupiter.kitty.http.server.ContextHandler;
 import com.julianjupiter.kitty.http.server.RequestHandler;
+import com.julianjupiter.kitty.util.Constants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,6 +21,18 @@ final class KittyRouter implements Router {
     @Override
     public Map<String, List<Route>> routes() {
         return Map.copyOf(this.routeMap);
+    }
+
+    @Override
+    public Router route(HttpMethod method, String path, RequestHandler handler) {
+        this.createRoute(method, path, handler);
+        return this;
+    }
+
+    @Override
+    public Router route(HttpMethod method, String path, ContextHandler handler) {
+        this.createRoute(method, path, handler);
+        return this;
     }
 
     @Override
@@ -170,6 +183,28 @@ final class KittyRouter implements Router {
         return this;
     }
 
+    @Override
+    public Router group(String path, RouteGroupHandler handler) {
+        var routeGroup = handler.handle(RouteGroupBuilder.create());
+        routeGroup.routes().stream()
+                .map(route -> {
+                    var resolvedPath = this.resolvePath(path);
+                    var resolvedRoutePath = this.resolvePath(route.path());
+                    var routePath = resolvedPath + Constants.Characters.FORWARD_SLASH + resolvedRoutePath;
+                    return new KittyRouteGroup.RouteGroupRoute(route.method(), Constants.Characters.FORWARD_SLASH + this.resolvePath(routePath), route.handler());
+                })
+                .forEach(route -> {
+                    var routeHandler = route.handler();
+                    if (routeHandler instanceof RequestHandler requestHandler) {
+                        this.addRoute(this.createRoute(route.method(), route.path(), requestHandler));
+                    } else {
+                        this.addRoute(this.createRoute(route.method(), route.path(), (ContextHandler) routeHandler));
+                    }
+                });
+
+        return this;
+    }
+
     private Route createRoute(HttpMethod method, String path, RequestHandler handler) {
         Handler kittyHandler = handler::handle;
         return new KittyRoute(method, path, kittyHandler);
@@ -194,5 +229,21 @@ final class KittyRouter implements Router {
 
     private void addRoutes(List<Route> routes) {
         routes.forEach(this::addRoute);
+    }
+
+    private String resolvePath(String path) {
+        if (path == null || path.isBlank()) {
+            return Constants.Characters.EMPTY_SPACE;
+        }
+
+        if (path.endsWith(Constants.Characters.FORWARD_SLASH)) {
+            return this.resolvePath(path.substring(0, path.length() - 1));
+        }
+
+        if (path.startsWith(Constants.Characters.FORWARD_SLASH)) {
+            return this.resolvePath(path.substring(1));
+        }
+
+        return path;
     }
 }
