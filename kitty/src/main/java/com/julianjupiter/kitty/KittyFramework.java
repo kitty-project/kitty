@@ -24,7 +24,7 @@ final class KittyFramework implements Kitty {
     }
 
     KittyFramework(Configuration configuration) {
-        this(configuration, RouterBuilder.builder().build());
+        this(configuration, RouterBuilder.create().build());
     }
 
     KittyFramework(Router router) {
@@ -33,7 +33,7 @@ final class KittyFramework implements Kitty {
 
     KittyFramework(Configuration configuration, Router router) {
         this.configuration = configuration;
-        this.routerBuilder = RouterBuilder.builder(router);
+        this.routerBuilder = RouterBuilder.create(router);
     }
 
     @Override
@@ -63,6 +63,18 @@ final class KittyFramework implements Kitty {
         runnable.run();
         this.updateServerPort(port);
         this.run();
+    }
+
+    @Override
+    public Kitty route(HttpMethod method, String path, RequestHandler handler) {
+        this.routerBuilder.route(method, path, handler);
+        return this;
+    }
+
+    @Override
+    public Kitty route(HttpMethod method, String path, ContextHandler handler) {
+        this.routerBuilder.route(method, path, handler);
+        return this;
     }
 
     @Override
@@ -182,6 +194,12 @@ final class KittyFramework implements Kitty {
     @Override
     public Kitty trace(String path, ContextHandler handler) {
         this.routerBuilder.trace(path, handler);
+        return this;
+    }
+
+    @Override
+    public Kitty group(String path, RouteGroupHandler handler) {
+        this.routerBuilder.group(path, handler);
         return this;
     }
 

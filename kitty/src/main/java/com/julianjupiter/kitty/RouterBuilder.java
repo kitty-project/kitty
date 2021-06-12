@@ -20,12 +20,24 @@ public final class RouterBuilder implements RouterProxy<RouterBuilder>, Builder<
         this.router = router;
     }
 
-    static RouterBuilder builder(Router router) {
+    static RouterBuilder create(Router router) {
         return new RouterBuilder(router);
     }
 
-    public static RouterBuilder builder() {
+    public static RouterBuilder create() {
         return new RouterBuilder();
+    }
+
+    @Override
+    public RouterBuilder route(HttpMethod method, String path, RequestHandler handler) {
+        this.router.route(method, path, handler);
+        return this;
+    }
+
+    @Override
+    public RouterBuilder route(HttpMethod method, String path, ContextHandler handler) {
+        this.router.route(method, path, handler);
+        return this;
     }
 
     @Override
@@ -145,6 +157,12 @@ public final class RouterBuilder implements RouterProxy<RouterBuilder>, Builder<
     @Override
     public RouterBuilder trace(String path, ContextHandler handler) {
         this.router.trace(path, handler);
+        return this;
+    }
+
+    @Override
+    public RouterBuilder group(String path, RouteGroupHandler handler) {
+        this.router.group(path, handler);
         return this;
     }
 

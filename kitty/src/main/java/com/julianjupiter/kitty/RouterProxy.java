@@ -10,6 +10,10 @@ import java.util.Set;
  * @author Julian Jupiter
  */
 interface RouterProxy<T> {
+    T route(HttpMethod method, String path, RequestHandler handler);
+
+    T route(HttpMethod method, String path, ContextHandler handler);
+
     T any(String path, RequestHandler handler);
 
     T any(String path, ContextHandler handler);
@@ -49,4 +53,6 @@ interface RouterProxy<T> {
     T trace(String path, RequestHandler handler);
 
     T trace(String path, ContextHandler handler);
+
+    T group(String path, RouteGroupHandler handler);
 }
