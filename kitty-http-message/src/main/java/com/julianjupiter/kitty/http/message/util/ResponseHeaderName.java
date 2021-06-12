@@ -23,6 +23,7 @@ public enum ResponseHeaderName {
     ACCEPT_LANGUAGE("Accept-Language"),
     ACCEPT_CONTROL_REQUEST_METHOD("Accept-Control-Request-Method"),
     ACCESS_CONTROL_REQUEST_HEADERS("Access-Control-Request-Headers"),
+    ALLOW("Allow"),
     AUTHORIZATION("Authorization"),
     CONTENT_LENGTH("Content-Length"),
     EXPECT("Expect"),
@@ -59,14 +60,14 @@ public enum ResponseHeaderName {
     CONTENT_MD5("Content-MD5"),
     CONTENT_TYPE("Content-Type");
 
-    private final String name;
+    private final String value;
 
     ResponseHeaderName(String name) {
-        this.name = name;
+        this.value = name;
     }
 
     @Override
     public String toString() {
-        return name;
+        return value;
     }
 }

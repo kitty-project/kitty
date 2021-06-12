@@ -59,14 +59,14 @@ public enum RequestHeaderName {
     CONTENT_MD5("Content-MD5"),
     CONTENT_TYPE("Content-Type");
 
-    private final String name;
+    private final String value;
 
     RequestHeaderName(String name) {
-        this.name = name;
+        this.value = name;
     }
 
     @Override
     public String toString() {
-        return name;
+        return value;
     }
 }
