@@ -8,6 +8,9 @@ public class Constants {
     // String Pool
     public static class Characters {
         public static final String COMMA = ",";
+        public static final String COLON = ":";
+        public static final String CURLY_BRACE_LEFT = "{";
+        public static final String CURLY_BRACE_RIGHT = "}";
         public static final String EMPTY_SPACE = "";
         public static final String FORWARD_SLASH = "/";
 

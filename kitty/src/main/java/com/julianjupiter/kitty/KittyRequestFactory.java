@@ -1,6 +1,7 @@
 package com.julianjupiter.kitty;
 
 import com.julianjupiter.kitty.http.message.Body;
+import com.julianjupiter.kitty.http.message.PathParam;
 import com.julianjupiter.kitty.http.message.QueryParam;
 import com.julianjupiter.kitty.http.message.Request;
 import com.julianjupiter.kitty.http.message.util.CookieSameSite;
@@ -22,9 +23,9 @@ import java.util.function.Predicate;
  */
 final class KittyRequestFactory implements RequestFactory {
     @Override
-    public Request createRequest(HttpRequest httpRequest, HttpContent httpContent) {
+    public Request createRequest(ServerConfiguration serverConfiguration, HttpRequest httpRequest, HttpContent httpContent) {
         return new KittyRequest(
-                this.createRequestLine(httpRequest),
+                this.createRequestLine(serverConfiguration, httpRequest),
                 this.createQueryParams(httpRequest),
                 this.createKittyHttpHeaders(httpRequest),
                 this.createKittyHttpCookies(httpRequest),
@@ -32,11 +33,27 @@ final class KittyRequestFactory implements RequestFactory {
         );
     }
 
-    private RequestLine createRequestLine(HttpRequest httpRequest) {
+    @Override
+    public Request createRequest(Request request, PathParam[] pathParams) {
+        return new KittyRequest(
+                this.createRequestLine(request),
+                request.queryParams(),
+                KittyHttpHeaders.create(request.headers()),
+                KittyHttpCookies.create(request.cookies()),
+                request.body(),
+                pathParams
+        );
+    }
+
+    private RequestLine createRequestLine(ServerConfiguration serverConfiguration, HttpRequest httpRequest) {
         var method = httpRequest.method().toString();
-        var uri = httpRequest.uri();
+        var uri = httpRequest.uri().substring(serverConfiguration.contextPath().length());
 
         return new KittyRequestLine(HttpMethod.of(method), URI.create(uri), this.createHttpVersion(httpRequest));
+    }
+
+    private RequestLine createRequestLine(Request request) {
+        return new KittyRequestLine(request.method(), request.target(), request.version());
     }
 
     private QueryParam[] createQueryParams(HttpRequest httpRequest) {
