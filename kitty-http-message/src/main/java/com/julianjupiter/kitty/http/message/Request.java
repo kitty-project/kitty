@@ -16,4 +16,8 @@ public interface Request extends Message {
     Optional<QueryParam> queryParam(String name);
 
     QueryParam[] queryParams();
+
+    Optional<PathParam> pathParam(String name);
+
+    PathParam[] pathParams();
 }
