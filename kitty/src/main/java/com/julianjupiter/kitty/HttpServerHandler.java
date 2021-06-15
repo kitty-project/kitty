@@ -57,9 +57,12 @@ class HttpServerHandler extends SimpleChannelInboundHandler<Object> {
 
         if (message instanceof HttpContent httpContent) {
             if (message instanceof LastHttpContent trailer) {
-                var kittyRequest = requestFactory.createRequest(this.nettyHttpRequest, httpContent);
+                var kittyRequest = requestFactory.createRequest(this.configuration.server(), this.nettyHttpRequest, httpContent);
                 var route = this.route(kittyRequest);
                 var handler = route.handler();
+                var pathParams = PathParamsFactory.create(kittyRequest.target())
+                        .createPathParams(route);
+                kittyRequest = requestFactory.createRequest(kittyRequest, pathParams);
                 var initialResponse = ResponseFactory.create()
                         .createResponse(kittyRequest);
                 this.response = handler.handle(kittyRequest, initialResponse);
@@ -81,7 +84,6 @@ class HttpServerHandler extends SimpleChannelInboundHandler<Object> {
 
     private void writeResponse(ChannelHandlerContext context) {
         var fullHttpResponse = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.CONTINUE, Unpooled.EMPTY_BUFFER);
-        logger.log(System.Logger.Level.INFO, "XXX");
         context.write(fullHttpResponse);
     }
 
@@ -136,9 +138,9 @@ class HttpServerHandler extends SimpleChannelInboundHandler<Object> {
     }
 
     private Route route(Request request) {
-        List<Route> foundRoutes = this.routes.entrySet().stream()
+        var foundRoutes = this.routes.entrySet().stream()
                 .filter(routeGroup -> {
-                    var requestPath = request.target().getPath().substring(this.configuration.server().contextPath().length());
+                    var requestPath = request.target().getPath();
                     return PathMatcher.create(routeGroup.getKey())
                             .match(requestPath)
                             .matches();

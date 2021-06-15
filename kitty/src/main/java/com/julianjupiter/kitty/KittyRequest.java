@@ -1,6 +1,7 @@
 package com.julianjupiter.kitty;
 
 import com.julianjupiter.kitty.http.message.Body;
+import com.julianjupiter.kitty.http.message.PathParam;
 import com.julianjupiter.kitty.http.message.QueryParam;
 import com.julianjupiter.kitty.http.message.Request;
 import com.julianjupiter.kitty.http.message.util.HttpMethod;
@@ -16,12 +17,18 @@ final class KittyRequest extends KittyMessage implements Request {
     private final HttpMethod method;
     private final URI target;
     private final QueryParam[] queryParams;
+    private final PathParam[] pathParams;
 
-    KittyRequest(RequestLine requestLine, QueryParam[] queryParams, KittyHttpHeaders httpHeaders, KittyHttpCookies kittyHttpCookies, Body body) {
-        super(requestLine.version(), httpHeaders, kittyHttpCookies, body);
+    KittyRequest(RequestLine requestLine, QueryParam[] queryParams, KittyHttpHeaders kittyHttpHeaders, KittyHttpCookies kittyHttpCookies, Body body) {
+        this(requestLine, queryParams, kittyHttpHeaders, kittyHttpCookies, body, new PathParam[0]);
+    }
+
+    KittyRequest(RequestLine requestLine, QueryParam[] queryParams, KittyHttpHeaders kittyHttpHeaders, KittyHttpCookies kittyHttpCookies, Body body, PathParam[] pathParams) {
+        super(requestLine.version(), kittyHttpHeaders, kittyHttpCookies, body);
         this.method = requestLine.method();
         this.target = requestLine.target();
         this.queryParams = queryParams;
+        this.pathParams = pathParams;
     }
 
     @Override
@@ -48,5 +55,21 @@ final class KittyRequest extends KittyMessage implements Request {
     @Override
     public QueryParam[] queryParams() {
         return this.queryParams;
+    }
+
+    @Override
+    public Optional<PathParam> pathParam(String name) {
+        if (name == null || name.isBlank()) {
+            return Optional.empty();
+        }
+
+        return Arrays.stream(this.pathParams)
+                .filter(pathParam -> pathParam.name().equals(name))
+                .findFirst();
+    }
+
+    @Override
+    public PathParam[] pathParams() {
+        return this.pathParams;
     }
 }

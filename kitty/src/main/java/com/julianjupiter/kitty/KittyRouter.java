@@ -221,8 +221,8 @@ final class KittyRouter implements Router {
             if (value == null) {
                 value = new ArrayList<>();
             }
-            var finalRoute = new KittyRoute(route.method(), compiledPath, route.handler());
-            value.add(finalRoute);
+//            var finalRoute = new KittyRoute(route.method(), compiledPath, route.handler());
+            value.add(route);
             return value;
         });
     }

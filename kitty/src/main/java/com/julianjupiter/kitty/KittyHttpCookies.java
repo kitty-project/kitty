@@ -12,13 +12,24 @@ import java.util.stream.Collectors;
  * @author Julian Jupiter
  */
 final class KittyHttpCookies {
-    private final Set<Cookie> cookieSet = new HashSet<>();
+    private final Set<Cookie> cookieSet;
 
     private KittyHttpCookies() {
+        this.cookieSet = new HashSet<>();
+    }
+
+    private KittyHttpCookies(Cookie[] cookies) {
+        this.cookieSet = (cookies != null) ?
+                Arrays.stream(cookies).collect(Collectors.toSet()) :
+                new HashSet<>();
     }
 
     public static KittyHttpCookies create() {
         return new KittyHttpCookies();
+    }
+
+    public static KittyHttpCookies create(Cookie[] cookies) {
+        return new KittyHttpCookies(cookies);
     }
 
     public KittyHttpCookies add(String name, String value) {
