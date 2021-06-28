@@ -1,8 +1,5 @@
 package com.julianjupiter.kitty.http.message;
 
-import java.util.OptionalInt;
-import java.util.OptionalLong;
-
 /**
  * @author Julian Jupiter
  */
@@ -11,7 +8,7 @@ public interface PathParam {
 
     String asString();
 
-    OptionalInt asInt();
+    int asInt();
 
-    OptionalLong asDouble();
+    long asLong();
 }

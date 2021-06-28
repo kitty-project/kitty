@@ -60,9 +60,8 @@ public class App {
         // GET http://localhost:7000/api/users/{id}
         app.get("/users/{id}", (request, response) -> {
             // Retrieve path param
-            int id = request.pathParam("id")
+            var id = request.pathParam("id")
                     .map(PathParam::asInt)
-                    .map(OptionalInt::getAsInt)
                     .orElse(0);
             return response
                     .status(200)
