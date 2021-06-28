@@ -6,5 +6,7 @@ package com.julianjupiter.kitty.http.message;
 public interface QueryParam {
     String name();
 
+    String value();
+
     String[] values();
 }
