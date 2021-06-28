@@ -46,14 +46,14 @@ public class App {
         app.get("/greetings", ctx -> {
             // Retrieve query param from http://localhost:7000/api/greetings?name=<value>
             var name = ctx.request().queryParam("name")
-                    .map(QueryParam::values)
-                    .orElse(new String[]{"Joe"});
+                    .map(QueryParam::value)
+                    .orElse("Joe");
             return ctx.response()
                     .header("Content-Type", "application/json; charset=UTF-8")
                     .body(String.format(
                             """
                             {"message": "Hello, %s!"}
-                            """, name[0])
+                            """, name)
                     );
         });
 
