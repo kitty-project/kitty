@@ -63,7 +63,7 @@ final class KittyRequestFactory implements RequestFactory {
                 .map(param -> {
                     var key = param.getKey();
                     var values = param.getValue().toArray(String[]::new);
-                    return new KittyQueryParam(key, values);
+                    return new KittyQueryParam(key, values[0], values);
                 })
                 .toArray(QueryParam[]::new);
     }
